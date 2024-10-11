@@ -25,6 +25,7 @@ namespace API_Project.DataAccess.Repositories
                          .Include(p => p.Amenities)
                          .Include(p => p.Images)
                          .Include(p => p.Inquiries)
+                         .Include(p => p.City)
 
                          .FirstOrDefault(p => p.Id == id);
         }

@@ -1,9 +1,8 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model IEnumerable<Inquity_List>
 
+@* 
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860 
+*@
 
 <h4>Messages for Properties</h4>
 <div class="my-property">
@@ -12,47 +11,28 @@
         <!-- Horizontal Card for each property -->
         <div class="col-md-12 mb-4">
             <!-- Message Cards -->
-            <div class="message-card">
-                <div class="message-header">
-                    <span class="sender-name">John Doe</span>
-                    <span class="message-date">Sep 28, 2024, 10:45 AM</span>
+            @if (Model != null && Model.Any())
+            {
+                @foreach (var message in Model)
+                {
+                    <div class="message-card mb-3">
+                        <div class="message-header">
+                            <span class="sender-name">@message.UserName</span>
+                            <span class="message-date">@message.DateSent.ToString("MMM dd, yyyy, hh:mm tt")</span> <!-- تنسيق التاريخ -->
+                        </div>
+                        <span class="sender-phone">@message.PhoneNumber</span>
+                        <div class="message-body">
+                            <p>@message.Message</p>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="col-md-12 mb-4">
+                    <p>No Massages found.</p>
                 </div>
-                <span class="sender-phone">0107237693</span>
-                <div class="message-body">
-
-                    <p>
-                        Hello, I am interested in the property and would like to know more
-                        about the amenities and availability. Please get back to me when
-                        possible. Thank you!
-                    </p>
-                </div>
-            </div>
-
-            <div class="message-card">
-                <div class="message-header">
-                    <span class="sender-name">Jane Smith</span>
-                    <span class="message-date">Sep 25, 2024, 03:30 PM</span>
-                </div>
-                <div class="message-body">
-                    <p>
-                        Is the property still available? I would like to schedule a visit
-                        next week.
-                    </p>
-                </div>
-            </div>
-
-            <div class="message-card">
-                <div class="message-header">
-                    <span class="sender-name">Michael Brown</span>
-                    <span class="message-date">Sep 20, 2024, 09:15 AM</span>
-                </div>
-                <div class="message-body">
-                    <p>
-                        I am interested in renting the property for 6 months. Could you
-                        provide more details on the lease terms?
-                    </p>
-                </div>
-            </div>
+            }
         </div>
         <!-- Repeat for other properties -->
     </div>

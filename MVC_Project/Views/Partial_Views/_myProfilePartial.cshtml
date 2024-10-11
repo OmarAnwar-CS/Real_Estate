@@ -1,70 +1,86 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
-
+﻿@model MVC_Project.Models.User_Info
 
 <h4>My Account</h4>
 <div class="dashboard-message contact-2 bdr clearfix">
     <div class="row">
         <div class="col-lg-12">
-            <form action="#" method="GET" enctype="multipart/form-data">
+            <form id="profileForm" enctype="multipart/form-data">
                 <div class="row">
+                    @Html.HiddenFor(m => m.Id)
                     <div class="col-lg-6 col-md-6">
                         <div class="form-group">
-                            <label>Your Name</label>
-                            <input type="text" name="name" class="form-control"
-                                   placeholder="John Deo">
+                            <label>First Name</label>
+                            @Html.TextBoxFor(m => m.F_Name, new { @class = "form-control", placeholder = "First Name", @id = "F_Name" })
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <div class="form-group">
-                            <label>Your Title</label>
-                            <input type="text" name="title" class="form-control"
-                                   placeholder="Support Manager">
+                            <label>Last Name</label>
+                            @Html.TextBoxFor(m => m.L_Name, new { @class = "form-control", placeholder = "Last Name", @id = "L_Name" })
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <div class="form-group">
                             <label>Phone</label>
-                            <input type="text" name="phone" class="form-control"
-                                   placeholder="01737 133959">
+                            @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", placeholder = "Phone Number", @id = "PhoneNumber" })
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <div class="form-group">
                             <label>Email</label>
-                            <input type="email" name="email" class="form-control"
-                                   placeholder="email@example.com">
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Email", @id = "Email" })
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <div class="form-group">
                             <label>Address</label>
-                            <input type="text" name="address" class="form-control"
-                                   placeholder="123 Kathal St. Tampa City,">
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6">
-                        <div class="form-group">
-                            <label>State</label>
-                            <input type="text" name="state" class="form-control"
-                                   placeholder="USA">
-                        </div>
-                    </div>
-                    <div class="col-lg-12 col-md-12 col-sm-12">
-                        <div class="form-group mb-0">
-                            <label>Personal info</label>
-                            <textarea class="form-control" name="message"
-                                      placeholder="Personal info"></textarea>
+                            @Html.TextBoxFor(m => m.Address, new { @class = "form-control", placeholder = "Address", @id = "Address" })
                         </div>
                     </div>
                     <div class="send-btn">
-                        <button type="submit" class="btn btn-md button-theme">Send Changes</button>
+                        <button type="button" id="submitBtn" class="btn btn-md button-theme">Send Changes</button>
                     </div>
                 </div>
             </form>
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#submitBtn').click(function () {
+                // تجميع بيانات النموذج
+                var userInfo = {
+                    F_Name: $('#F_Name').val(),
+                    L_Name: $('#L_Name').val(),
+                    Email: $('#Email').val(),
+                    PhoneNumber: $('#PhoneNumber').val(),
+                    Address: $('#Address').val(),
+                    ProfilePicture: "" // يمكنك إضافة صورة في حال احتجت لذلك
+                };
+
+                console.log(userInfo); // عرض بيانات userInfo في الـ console
+
+                // قراءة قيمة Id الخاصة بالمستخدم من الحقل المخفي
+                var userId = '@Model.Id';
+
+                // إرسال طلب AJAX إلى الـ API مباشرة
+                $.ajax({
+                    url: 'https://localhost:7197/api/User/UpdateById/' + userId,
+                    type: 'PUT',
+                    contentType: 'application/json',
+                    data: JSON.stringify(userInfo),
+                    success: function (response) {
+                        alert('Profile updated successfully!');
+                        // يمكنك إعادة تحميل الـ Partial View أو تحديث جزء من الصفحة هنا
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(xhr); // عرض تفاصيل الخطأ في الـ console
+                        alert('Failed to update profile. Please try again.');
+                    }
+                });
+            });
+        });
+    </script>
+}

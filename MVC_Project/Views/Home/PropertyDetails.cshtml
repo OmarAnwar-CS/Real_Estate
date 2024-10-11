@@ -1,0 +1,175 @@
+﻿@model MVC_Project.Models.Property_AllInfo
+
+@{
+    ViewData["Title"] = "My Profile";
+    ViewData["PageHeader"] = "Property Details";
+}
+
+<div class="container mt-5">
+    <div class="row">
+        <!-- Property Images and Owner Details -->
+        <div class="col-lg-8 position-relative">
+            <!-- Property Images -->
+            <div id="propertyImagesCarousel" class="carousel slide property-images" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    @if (Model.Image != null && Model.Image.Any())
+                    {
+                        @foreach (var image in Model.Image)
+                        {
+                            <div class="carousel-item @(image == Model.Image.First() ? "active" : "")">
+                                <img src="@image" class="d-block w-100" alt="Property Image">
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="carousel-item active">
+                            <img src="path_to_placeholder_image.jpg" class="d-block w-100" alt="No Image Available">
+                        </div>
+                    }
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#propertyImagesCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#propertyImagesCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+            <!-- Status Badge -->
+            <span class="badge-for-sale @((int)Model.Status == 1 ? "bg-info" : "bg-primary")">
+                @((int)Model.Status == 1 ? "For Rent" : "For Sale")
+            </span>
+        </div>
+
+        <!-- Owner Details -->
+        <div class="col-lg-4">
+            <div class="owner-details text-center">
+                <img src="@Model.ProfilePicture" alt="Owner Image" class="img-fluid rounded-circle"> <!-- Assuming you have an OwnerImage property -->
+                <h5>@Model.OwnerName</h5> <!-- Assuming you have an OwnerName property -->
+                <span><i class="fas fa-phone"></i> @Model.PhoneNumber</span> <!-- Assuming you have an OwnerPhone property -->
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-8 position-relative">
+            <!-- Property Details Section -->
+            <div class="property-details mt-5">
+                <h2 class="mb-3">@Model.Title</h2>
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <th>Price</th>
+                            <td>@Model.Price</td>
+                        </tr>
+                        <tr>
+                            <th>Location</th>
+                            <td>@Model.Location</td> <!-- Assuming you have a Location property -->
+                        </tr>
+                        <tr>
+                            <th>Area</th>
+                            <td>@Model.Area sq ft</td> <!-- Assuming you have an Area property -->
+                        </tr>
+                        <tr>
+                            <th>Property Type</th>
+                            <td>@Model.PropertyType</td> <!-- Assuming you have a PropertyType property -->
+                        </tr>
+                        <tr>
+                            <th>Bedrooms</th>
+                            <td>@Model.Bedrooms</td> <!-- Assuming you have a Bedrooms property -->
+                        </tr>
+                        <tr>
+                            <th>Bathrooms</th>
+                            <td>@Model.Bathrooms</td> <!-- Assuming you have a Bathrooms property -->
+                        </tr>
+                        <tr>
+                            <th>City</th>
+                            <td>@Model.City</td> <!-- Assuming you have a City property -->
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Property Description -->
+            <div class="property-description mt-4">
+                <h4>Description:</h4>
+                <p>@Model.Description</p> <!-- Assuming you have a Description property -->
+            </div>
+
+            <!-- Amenities Section -->
+            <div class="amenities mt-4">
+                <h4>Amenities:</h4>
+                <ul class="row">
+                    @if (Model.HasGarage)
+                    {
+                        <li class="col-md-4"><i class="fas fa-check"></i> Garage</li>
+                    }
+                    @if (Model.Two_Stories)
+                    {
+                        <li class="col-md-4"><i class="fas fa-check"></i> Two Stories</li>
+                    }
+                    @if (Model.Laundry_Room)
+                    {
+                        <li class="col-md-4"><i class="fas fa-check"></i> Laundry Room</li>
+                    }
+                    @if (Model.HasPool)
+                    {
+                        <li class="col-md-4"><i class="fas fa-check"></i> Pool</li>
+                    }
+                    @if (Model.HasGarden)
+                    {
+                        <li class="col-md-4"><i class="fas fa-check"></i> Garden</li>
+                    }
+                    @if (Model.HasElevator)
+                    {
+                        <li class="col-md-4"><i class="fas fa-check"></i> Elevator</li>
+                    }
+                    @if (Model.HasBalcony)
+                    {
+                        <li class="col-md-4"><i class="fas fa-check"></i> Balcony</li>
+                    }
+                    @if (Model.HasParking)
+                    {
+                        <li class="col-md-4"><i class="fas fa-check"></i> Parking</li>
+                    }
+                    @if (Model.HasCentralHeating)
+                    {
+                        <li class="col-md-4"><i class="fas fa-check"></i> Central Heating</li>
+                    }
+                    @if (Model.IsFurnished)
+                    {
+                        <li class="col-md-4"><i class="fas fa-check"></i> Furnished</li>
+                    }
+                </ul>
+            </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="col-lg-4">
+            <div class="contact-owner-form mt-4">
+                <h4>Contact Owner:</h4>
+                <form>
+                    <div class="mb-3">
+                        <label for="yourName" class="form-label">Your Name</label>
+                        <input type="text" class="form-control" id="yourName" placeholder="Enter your name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="yourEmail" class="form-label">Your Email</label>
+                        <input type="email" class="form-control" id="yourEmail" placeholder="Enter your email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="yourMessage" class="form-label">Your Message</label>
+                        <textarea class="form-control" id="yourMessage" rows="4" placeholder="Write your message" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="yourPhone" class="form-label">Your Phone Number</label>
+                        <input type="text" class="form-control" id="yourPhone" placeholder="Enter your phone number" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

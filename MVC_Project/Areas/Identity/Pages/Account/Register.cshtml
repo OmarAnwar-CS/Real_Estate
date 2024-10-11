@@ -5,61 +5,82 @@
 }
 
 <!-- Register area -->
-<section class="vh-100" style="background-color: #eee;">
-    <div class="container h-100">
-        <div class="row d-flex justify-content-center align-items-center h-100">
-            <div class="col-lg-12 col-xl-11">
-                <div class="card text-black" style="border-radius: 25px;">
+<section  style="background-color: #eee;">
+    <div class="container h-70">
+        <div class="row d-flex justify-content-center align-items-center h-70">
+            <div class="col-lg-12 col-xl-10">
+                <div class="card text-black" style="border-radius: 25px;margin-top: 10px;margin-bottom: 10px;">
                     <div class="card-body p-md-5">
                         <div class="row justify-content-center">
-                            <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+                            <div class="col-md-10 col-lg-6 col-xl-6 order-2 order-lg-1">
 
-                                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
+                                <p class="text-center h1 fw-bold mb-4 mt-4">Sign up</p>
 
-                                <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="mx-1 mx-md-4">
-                                    <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                                <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="mx-2 mx-md-4">
+                                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3" role="alert"></div>
 
-                                    <div class="d-flex flex-row align-items-center mb-4">
-                                        <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
-                                        <div class="form-outline flex-fill mb-0">
-                                            <input asp-for="Input.Email" class="form-control" autocomplete="username" />
-                                            <label class="form-label" asp-for="Input.Email">Your Email</label>
+                                    <!-- First Name and Last Name -->
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <div class="form-outline">
+                                                <input asp-for="Input.FirstName" class="form-control form-control-sm" placeholder="First Name" />
+                                                <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <div class="form-outline">
+                                                <input asp-for="Input.LastName" class="form-control form-control-sm" placeholder="Last Name" />
+                                                <span asp-validation-for="Input.LastName" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Phone Number -->
+                                    <div class="mb-3">
+                                        <div class="form-outline">
+                                            <input asp-for="Input.PhoneNumber" class="form-control form-control-sm" placeholder="Phone Number" />
+                                            <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Email -->
+                                    <div class="mb-3">
+                                        <div class="form-outline">
+                                            <input asp-for="Input.Email" class="form-control form-control-sm" placeholder="Email" autocomplete="username" />
                                             <span asp-validation-for="Input.Email" class="text-danger"></span>
                                         </div>
                                     </div>
 
-                                    <div class="d-flex flex-row align-items-center mb-4">
-                                        <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
-                                        <div class="form-outline flex-fill mb-0">
-                                            <input asp-for="Input.Password" class="form-control" autocomplete="new-password" />
-                                            <label class="form-label" asp-for="Input.Password">Password</label>
+                                    <!-- Password -->
+                                    <div class="mb-3">
+                                        <div class="form-outline">
+                                            <input asp-for="Input.Password" class="form-control form-control-sm" placeholder="Password" autocomplete="new-password" />
                                             <span asp-validation-for="Input.Password" class="text-danger"></span>
                                         </div>
                                     </div>
 
-                                    <div class="d-flex flex-row align-items-center mb-4">
-                                        <i class="fas fa-key fa-lg me-3 fa-fw"></i>
-                                        <div class="form-outline flex-fill mb-0">
-                                            <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" />
-                                            <label class="form-label" asp-for="Input.ConfirmPassword">Repeat your password</label>
+                                    <!-- Confirm Password -->
+                                    <div class="mb-3">
+                                        <div class="form-outline">
+                                            <input asp-for="Input.ConfirmPassword" class="form-control form-control-sm" placeholder="Confirm Password" autocomplete="new-password" />
                                             <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
                                         </div>
                                     </div>
 
-                                    <div class="form-check d-flex justify-content-center mb-5">
-                                        <input class="form-check-input me-2" type="checkbox" id="form2Example3c" />
-                                        <label class="form-check-label" for="form2Example3">
-                                            I agree to the <a href="#">Terms of Service</a>
-                                        </label>
+                                    <!-- Terms and Conditions -->
+                                    <div class="form-check d-flex justify-content-center mb-4">
+                                        <input class="form-check-input" type="checkbox" id="terms" />
+                                        <label class="form-check-label" for="terms">I agree to the <a href="#">Terms of Service</a></label>
                                     </div>
 
-                                    <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                                        <button id="registerSubmit" type="submit" class="btn btn-primary btn-lg">Register</button>
+                                    <!-- Submit Button -->
+                                    <div class="d-flex justify-content-center">
+                                        <button id="registerSubmit" type="submit" class="btn btn-primary btn-block">Register</button>
                                     </div>
                                 </form>
                             </div>
 
-                            <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+                            <div class="col-md-10 col-lg-6 col-xl-6 d-flex align-items-center order-1 order-lg-2">
                                 <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp" class="img-fluid" alt="Sample image">
                             </div>
                         </div>

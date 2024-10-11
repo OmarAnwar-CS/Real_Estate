@@ -3,7 +3,10 @@ using Microsoft.IdentityModel.Tokens;
 using MVC_Project.API_Services;
 using MVC_Project.Models;
 using MVC_Project.ViewModel;
+using Newtonsoft.Json;
 using System.Diagnostics;
+using System.Net.Http;
+using System.Text;
 
 namespace MVC_Project.Controllers
 {
@@ -12,7 +15,7 @@ namespace MVC_Project.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly IBase_API_Call _base_API_Call;
 
-        public HomeController(ILogger<HomeController> logger,IBase_API_Call base_API_Call)
+        public HomeController(ILogger<HomeController> logger, IBase_API_Call base_API_Call)
         {
             _logger = logger;
             _base_API_Call = base_API_Call;
@@ -27,42 +30,33 @@ namespace MVC_Project.Controllers
         public async Task<IActionResult> Properties()
         {
             var cityList = await _base_API_Call.GetAllCity();
-
-            var properyList = await _base_API_Call.GetPropertyList();
+            var propertyList = await _base_API_Call.GetPropertyList();
             var viewModel = new PropertyViewModel
             {
-                Properties = properyList,
+                Properties = propertyList,
                 Cites = cityList
             };
 
-            int max = (int)properyList.Max(x => x.Price);
-            ViewData["MaxPrice"] = max;
-            int min = (int)properyList.Min(x => x.Price);
-            ViewData["MinPrice"] = min;
-            max = (int)properyList.Max(x => x.Area);
-            ViewData["MaxArea"] = max;
-            min = (int)properyList.Min(x => x.Area);
-            ViewData["MinArea"] = min;
+            ViewData["MaxPrice"] = propertyList.Max(x => x.Price);
+            ViewData["MinPrice"] = propertyList.Min(x => x.Price);
+            ViewData["MaxArea"] = propertyList.Max(x => x.Area);
+            ViewData["MinArea"] = propertyList.Min(x => x.Area);
 
-            
             return View(viewModel);
-
         }
 
         public async Task<IActionResult> PropertyiesPartial(string? keyWord = null, string? city = null, int? status = null,
-
                                                decimal? maxPrice = null, double? maxArea = null,
                                                int? maxBaths = null, int? maxBed = null,
-
                                                bool HasGarage = false, bool Two_Stories = false, bool Laundry_Room = false,
                                                bool HasPool = false, bool HasGarden = false, bool HasElevator = false,
                                                bool HasBalcony = false, bool HasParking = false, bool HasCentralHeating = false, bool IsFurnished = false)
         {
-            Filter filter = new Filter{
-
-                Status = status == 0 ? null:(status == 1 ? Status.rent : (status == 2 ? Status.buy : null)),
+            Filter filter = new Filter
+            {
+                Status = status == 0 ? null : (status == 1 ? Status.rent : (status == 2 ? Status.buy : null)),
                 City = city != "All" ? city : null,
-                Keyword = keyWord.IsNullOrEmpty() ? null : keyWord,
+                Keyword = string.IsNullOrEmpty(keyWord) ? null : keyWord,
                 PriceRange = maxPrice != 0 ? maxPrice : null,
                 AreaSize = maxArea != 0 ? maxArea : null,
                 Beds = maxBed != 0 ? maxBed : null,
@@ -77,54 +71,104 @@ namespace MVC_Project.Controllers
                 HasParking = HasParking,
                 HasCentralHeating = HasCentralHeating,
                 IsFurnished = IsFurnished
-
             };
-           
 
             var properties = await _base_API_Call.GetFilteredProperties(filter);
-
             return PartialView("/Views/Partial_Views/_propertyListPartial.cshtml", properties);
         }
 
 
+
+        public async Task<IActionResult> PropertyDetails(int id) // ???? ?? ?? ??? ?????? ?? "PropertyDetails"
+        {
+            var property = await _base_API_Call.GetPropertyById(id);
+            return View("PropertyDetails", property);
+        }
+
+
+
         public async Task<IActionResult> Profile()
         {
-            var user = await _base_API_Call.GetUserInfo(1);
+            // ?????? ??? ?????? ?????????? ?? Claims
+            var email = User.FindFirst(System.Security.Claims.ClaimTypes.Email)?.Value;
+
+            if (string.IsNullOrEmpty(email))
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            // ?????? ??? ??????? ???????? ?? API
+            var user = await _base_API_Call.GetUserInfo(email);
+
+            // ????? ???????? ?? ??????
+            HttpContext.Session.SetString("User", JsonConvert.SerializeObject(user));
+            ViewBag.User = JsonConvert.SerializeObject(user);
+
             return View(user);
         }
+
         public IActionResult ProfilePartial()
         {
-            //var user = await _base_API_Call.GetUserInfo(1);
-            return PartialView("/Views/Partial_Views/_myProfilePartial.cshtml");
-        }
-        public IActionResult MyPropertiesPartial()
-        {
-            //var user = await _base_API_Call.GetUserInfo(1);
-            return PartialView("/Views/Partial_Views/_myPropertiesPartial.cshtml");
+            var userJson = HttpContext.Session.GetString("User");
+            if (string.IsNullOrEmpty(userJson))
+            {
+                return RedirectToAction("Profile");
+            }
+
+            var user = JsonConvert.DeserializeObject<User_Info>(userJson);
+            return PartialView("/Views/Partial_Views/_myProfilePartial.cshtml", user);
         }
 
-        public IActionResult FavoritedPropertiesPartial()
+        public async Task<IActionResult> MyPropertiesPartial()
         {
-            //var user = await _base_API_Call.GetUserInfo(1);
-            return PartialView("/Views/Partial_Views/_favoritedPropertiesPartial.cshtml");
+            var userJson = HttpContext.Session.GetString("User");
+            if (string.IsNullOrEmpty(userJson))
+            {
+                return RedirectToAction("Profile");
+            }
+
+            var user = JsonConvert.DeserializeObject<User_Info>(userJson);
+            var properties = await _base_API_Call.GetPropertyList(user.PropertiesId);
+            return PartialView("/Views/Partial_Views/_myPropertiesPartial.cshtml", properties);
         }
 
-        public IActionResult MassagesPartial()
+        public async Task<IActionResult> FavoritedPropertiesPartial()
         {
-            //var user = await _base_API_Call.GetUserInfo(1);
-            return PartialView("/Views/Partial_Views/_massagesPartial.cshtml");
+            var userJson = HttpContext.Session.GetString("User");
+            if (string.IsNullOrEmpty(userJson))
+            {
+                return RedirectToAction("Profile");
+            }
+
+            var user = JsonConvert.DeserializeObject<User_Info>(userJson);
+            var properties = await _base_API_Call.GetPropertyList(user.FavoriteId);
+            return PartialView("/Views/Partial_Views/_favoritedPropertiesPartial.cshtml", properties);
         }
+
+        public async Task<IActionResult> MassagesPartial()
+        {
+            var userJson = HttpContext.Session.GetString("User");
+            if (string.IsNullOrEmpty(userJson))
+            {
+                return RedirectToAction("Profile");
+            }
+
+            var user = JsonConvert.DeserializeObject<User_Info>(userJson);
+            var massages = await _base_API_Call.GetMassagesToUser(user.Id);
+
+            return PartialView("/Views/Partial_Views/_massagesPartial.cshtml", massages);
+        }
+
+
         public IActionResult SubmitPropertyPartial()
         {
-            //var user = await _base_API_Call.GetUserInfo(1);
             return PartialView("/Views/Partial_Views/_submitPropertyPartial.cshtml");
         }
+
         public IActionResult ChangePasswordPartial()
         {
-            //var user = await _base_API_Call.GetUserInfo(1);
             return PartialView("/Views/Partial_Views/_changePasswordPartial.cshtml");
         }
-        
 
         public IActionResult Privacy()
         {

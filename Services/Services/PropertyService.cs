@@ -71,56 +71,6 @@ namespace Application.Services
             }
         }
 
-
-        //public void CreateProperty(Property_Create _property)
-        //{
-        //    try
-        //    {
-        //        ValidateProperty(_property);
-
-        //        _cityService.CreateCity(new City_Add { Name =_property.City });
-
-        //        int cityId =  _cityService.GetCityByName(_property.City).Id;
-
-        //        _amenitiesService.CreateAmenities(_property.Amenities);
-
-        //        var AllAmenities = _unitOfWork.Amenities.GetAll().ToList();
-
-        //        int amenitiesId = 0;
-        //        foreach (var amenity in AllAmenities)
-        //        {
-        //            if (
-        //                (_property.Amenities.HasPool == amenity.HasPool) && (_property.Amenities.HasBalcony == amenity.HasBalcony) &&
-        //                (_property.Amenities.HasParking == amenity.HasParking) && (_property.Amenities.Two_Stories == amenity.Two_Stories) &&
-        //                (_property.Amenities.HasGarage == amenity.HasGarage) && (_property.Amenities.HasBalcony == amenity.HasBalcony) &&
-        //                (_property.Amenities.HasCentralHeating == amenity.HasCentralHeating) && (_property.Amenities.HasElevator == amenity.HasElevator) &&
-        //                (_property.Amenities.IsFurnished == amenity.IsFurnished)
-        //                )
-        //            {
-        //                amenitiesId = amenity.Id;
-        //                break;
-        //            }
-        //        }
-
-        //        var property = PropertyMapping.MapToProperty(_property, amenitiesId, cityId);
-
-        //        _unitOfWork.Property.Insert(property);
-        //        _unitOfWork.Save();
-
-        //        int propertyId = GetPropertyIdByTitle(_property.Title, _property.OwnerId);
-
-        //        foreach (var image in _property.Images)
-        //        {
-        //            _propertyImageService.CreatePropertyImage(propertyId, image);
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        // Log exception here
-        //        throw new ApplicationException("An error occurred while creating the property.", ex);
-        //    }
-        //}
-
         public void CreateProperty(Property_Create _property)
         {
             try

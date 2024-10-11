@@ -1,5 +1,7 @@
 ﻿using _Services.Contracts;
+using _Services.EntityMapping;
 using _Services.Models.Inquiry;
+using _Services.Models.Property;
 using API_Project.DataAccess.Models;
 using Application.DataAccessContracts;
 using Application.Services;
@@ -20,6 +22,81 @@ namespace _Services.Services
             _unitOfWork = unitOfWork;
             _userService = userService;
         }
+
+        public IEnumerable<Inquity_List> GetInquiries()
+        {
+            try
+            {
+                var inquiries = _unitOfWork.Inquiry.GetAll().Select(U => new Inquity_List
+                {
+                    Id = U.Id,
+                    UserId = U.UserId,
+                    PropertyId = U.PropertyId,
+                    UserName = U.User.FullName,
+                    PropertyName = U.Property.Title,
+                    PhoneNumber = U.PhoneNumber,
+                    Message = U.Message,
+                    DateSent = U.DateSent
+                });
+
+                return inquiries;
+            }
+            catch (Exception ex)
+            {
+                // Log exception here
+                throw new ApplicationException("An error occurred while fetching inquiries.", ex);
+            }
+        }
+        public IEnumerable<Inquity_List> GetInquitiesToUser(int UserId)
+        {
+            try
+            {
+                var inquiries = _unitOfWork.Inquiry.GetAll().Where(U => U.Property.OwnerId == UserId).Select(U => new Inquity_List
+                {
+                    Id = U.Id,
+                    UserId = U.UserId,
+                    PropertyId = U.PropertyId,
+                    UserName = U.User.FullName,
+                    PropertyName = U.Property.Title,
+                    PhoneNumber = U.PhoneNumber,
+                    Message = U.Message,
+                    DateSent = U.DateSent
+                });
+
+                return inquiries;
+            }
+            catch (Exception ex)
+            {
+                // Log exception here
+                throw new ApplicationException("An error occurred while fetching inquiries.", ex);
+            }
+        }
+
+        public IEnumerable<Inquity_List> GetInquitiesToPropety(int propetyId)
+        {
+            try
+            {
+                var inquiries = _unitOfWork.Inquiry.GetAll().Where(U => U.PropertyId == propetyId).Select(U => new Inquity_List
+                {
+                    Id = U.Id,
+                    UserId = U.UserId,
+                    PropertyId = U.PropertyId,
+                    UserName = U.User.FullName,
+                    PropertyName = U.Property.Title,
+                    PhoneNumber = U.PhoneNumber,
+                    Message = U.Message,
+                    DateSent = U.DateSent
+                });
+
+                return inquiries;
+            }
+            catch (Exception ex)
+            {
+                // Log exception here
+                throw new ApplicationException("An error occurred while fetching inquiries.", ex);
+            }
+        }
+
 
         public void CreateInquiry(Inquiry_Create _inquiry)
         {

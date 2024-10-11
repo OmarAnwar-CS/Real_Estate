@@ -20,7 +20,10 @@ namespace API_Project.DataAccess.Repositories
 
         public User? GetByEmail(string email)
         {
-            return _dbSet.FirstOrDefault(User => User.Email == email);
+            return _dbSet.Include(user => user.Properties)
+                         .Include(user => user.Inquiries)
+                         .Include(user => user.Favorite)
+                         .FirstOrDefault(User => User.Email == email);
         }
 
         public User? GetByEmailAndPassword(string email, string password)

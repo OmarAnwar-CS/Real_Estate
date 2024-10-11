@@ -1,0 +1,426 @@
+/* General Styling */
+body {
+    font-family: 'Open Sans', sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #343a40;
+}
+
+.navbar-brand img {
+    height: 50px;
+}
+
+.navbar-nav .nav-link {
+    color: #f8f9fa !important;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #ffc107 !important;
+}
+
+/* Buttons */
+.btn-outline-success,
+.btn-outline-primary {
+    border-radius: 20px;
+}
+
+.btn-outline-success {
+    border-color: #28a745;
+    color: #28a745;
+}
+
+.btn-outline-success:hover {
+    background-color: #28a745;
+    color: #fff;
+}
+
+.btn-outline-primary {
+    border-color: #007bff;
+    color: #007bff;
+}
+
+.btn-outline-primary:hover {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    border-radius: 10px;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #004085;
+}
+
+.btn.button-theme {
+    background-color: #007bff;
+    color: white;
+}
+
+.btn.button-theme:hover {
+    background-color: #0056b3;
+}
+
+/* Carousel */
+.carousel-item img {
+    object-fit: cover;
+    height: 100vh;
+}
+
+.carousel-inner img {
+    height: 500px;
+    object-fit: cover;
+}
+
+/* Slider Content */
+.slider-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 800px;
+}
+
+.slider-content h2 {
+    color: #343a40;
+    margin-bottom: 20px;
+}
+
+.slider-content p {
+    color: #6c757d;
+    margin-bottom: 30px;
+}
+
+/* Form Controls */
+.form-control,
+.form-select {
+    border-radius: 10px;
+    border: 1px solid #ced4da;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #007bff;
+    box-shadow: none;
+}
+
+/* Property Items */
+.property-item {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.property-item img {
+    height: 250px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.property-item .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    flex-grow: 1;
+    padding: 1.25rem;
+    text-align: center;
+}
+
+/* Pagination */
+.pagination {
+    justify-content: center;
+}
+
+/* Footer */
+.footer {
+    background-color: #343a40;
+    color: #f8f9fa;
+    padding: 15px 0;
+    text-align: center;
+    margin-top: auto;
+}
+
+.footer a {
+    color: #ffc107;
+}
+
+.footer a:hover {
+    color: #e0a800;
+}
+
+/* Page Head */
+.page-head {
+    padding: 20px 0;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #ddd;
+}
+
+.page-title {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Filter Button */
+.filter-toggle {
+    cursor: pointer;
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #007bff;
+    border: none;
+    background: none;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    border-radius: 25px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.filter-toggle:hover {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.filter-toggle i {
+    margin-right: 8px;
+}
+
+.filter-checkbox-label {
+    margin-right: 10px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .slider-content {
+        width: 95%;
+    }
+
+    .filter-toggle {
+        font-size: 1rem;
+        padding: 8px 16px;
+    }
+}
+
+@media (max-width: 576px) {
+    .slider-content {
+        width: 100%;
+        padding: 20px;
+    }
+
+    .filter-toggle {
+        font-size: 0.875rem;
+        padding: 6px 12px;
+    }
+}
+
+/* Badge for Sale */
+.badge-for-sale {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    font-size: 18px;
+}
+
+/* Property Details */
+.property-details {
+    margin-top: 30px;
+}
+
+.amenities ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.amenities ul li {
+    margin-bottom: 10px;
+}
+
+/* Owner Details */
+.owner-details img {
+    width: 80px;
+    border-radius: 50%;
+}
+
+.owner-details h5,
+.owner-details span {
+    margin-left: 15px;
+}
+
+/* Contact Form */
+.contact-owner-form {
+    margin-top: 20px;
+}
+
+/* Dashboard Navigation */
+.dashboard-nav-2 {
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    padding: 15px;
+}
+
+/* Profile Photo */
+.profile-photo {
+    text-align: center;
+}
+
+.profile-photo img {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+}
+
+.change-photo-btn {
+    margin-top: 10px;
+}
+
+.profile-photo.position-relative img {
+    max-width: 150px;
+}
+
+.change-photo-btn.position-absolute {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Detail List */
+.detail ul {
+    list-style: none;
+    padding: 0;
+}
+
+.detail ul li a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #333;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.detail ul li a.active {
+    background-color: #007bff;
+    color: white;
+}
+
+/* Dashboard Content */
+.dashboard-content {
+    padding: 15px;
+}
+
+.dashboard-list {
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+/* Form Group */
+.form-group label {
+    font-weight: bold;
+}
+
+/* Submit Button */
+.send-btn {
+    text-align: center;
+    margin-top: 15px;
+}
+
+/* Message Card */
+.message-card {
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.message-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.message-body {
+    margin-top: 15px;
+}
+
+.message-body p {
+    font-size: 14px;
+    color: #555;
+}
+
+.sender-name {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.sender-phone {
+    font-weight: bold;
+    font-size: 16px;
+    color: #3d3d3d;
+}
+
+.message-date {
+    font-size: 12px;
+    color: #888;
+}
+
+/* Card Hover Effects */
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.card-img-left {
+    border-radius: 5px 0 0 5px;
+}
+
+.actions .btn {
+    padding: 5px 10px;
+    font-size: 0.9rem;
+}
+
+.card {
+    height: auto;
+    padding: 10px;
+}
+
+.card-body {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-img-left {
+    width: 200px;
+    height: auto;
+}
+
+.actions {
+    margin-top: 10px;
+}

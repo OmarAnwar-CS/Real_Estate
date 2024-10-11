@@ -16,28 +16,57 @@ namespace API_Project.Controllers
             _inquiryService = inquiryService;
         }
 
+        // Get all inquiries
+        [HttpGet]
+        public IActionResult GetInquiries()
+        {
+            var inquiries = _inquiryService.GetInquiries();
+            return Ok(inquiries);
+        }
+
+        // Get inquiries for a specific user
+        [HttpGet("user/{userId}")]
+        public IActionResult GetInquiriesToUser(int userId)
+        {
+            var inquiries = _inquiryService.GetInquitiesToUser(userId);
+            return Ok(inquiries);
+        }
+
+        // Get inquiries for a specific property
+        [HttpGet("property/{propertyId}")]
+        public IActionResult GetInquiriesToProperty(int propertyId)
+        {
+            var inquiries = _inquiryService.GetInquitiesToPropety(propertyId);
+            return Ok(inquiries);
+        }
 
         // Create a new inquiry
         [HttpPost]
-        public IActionResult CreateInquiry([FromBody] Inquiry_Create _inquiry)
+        public IActionResult CreateInquiry([FromBody] Inquiry_Create inquiry)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            _inquiryService.CreateInquiry(_inquiry);
+            _inquiryService.CreateInquiry(inquiry);
             return Ok("Inquiry created successfully.");
         }
 
         // Update an existing inquiry
         [HttpPut("{id}")]
-        public IActionResult UpdateInquiry(int id, [FromBody] Inquiry_Update _inquiry)
+        public IActionResult UpdateInquiry(int id, [FromBody] Inquiry_Update inquiry)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            //inquiryDto.Id = id; // Ensure ID is set for update
-            _inquiryService.UpdateInquiry(id, _inquiry);
-            return Ok("Inquiry updated successfully.");
+            try
+            {
+                _inquiryService.UpdateInquiry(id, inquiry);
+                return Ok("Inquiry updated successfully.");
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // Delete an inquiry by ID
@@ -52,6 +81,10 @@ namespace API_Project.Controllers
             catch (ArgumentException ex)
             {
                 return BadRequest(ex.Message);
+            }
+            catch (Exception ex) // Catch any other exceptions
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
     }

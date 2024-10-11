@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MVC_Project.API_Services;
 using MVC_Project.Data;
@@ -20,18 +20,21 @@ namespace MVC_Project
             builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
-
             builder.Services.AddControllersWithViews();
-
 
             // Adding HttpClient
             builder.Services.AddHttpClient<IBase_API_Call, Base_API_Call>(client =>
             {
-                client.BaseAddress = new Uri("http://localhost:7197/api/"); // ?????? ???? ??? API ????? ?? ???
-                //client.DefaultRequestHeaders.Accept.Clear();
-                //client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                client.BaseAddress = new Uri("http://localhost:7197/api/"); // عنوان الـ API
             });
 
+            // إضافة إعدادات الجلسة
+            builder.Services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30); // وقت انتهاء الجلسة
+                options.Cookie.HttpOnly = true; // يجعل الكوكيز غير قابلة للوصول عبر JavaScript
+                options.Cookie.IsEssential = true; // يجعل الكوكيز ضرورية
+            });
 
             var app = builder.Build();
 
@@ -47,6 +50,9 @@ namespace MVC_Project
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            // Configure the session middleware
+            app.UseSession(); // تأكد من إضافة هذه السطر قبل استخدام التوجيه
 
             app.UseAuthorization();
 

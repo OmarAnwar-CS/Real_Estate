@@ -1,8 +1,125 @@
-﻿@{
+﻿@model IEnumerable<MVC_Project.Models.City_Get>
+
+@{
     ViewData["Title"] = "Home Page";
+    ViewData["Page Header"] = "Your dream home is just a click away";
+
+
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="position-relative">
+    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+                aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="assets/img/slide1/slider-image-1.jpg" class="d-block w-100" alt="Mirror Edge">
+            </div>
+            <div class="carousel-item">
+                <img src="assets/img/slide1/slider-image-2.jpg" class="d-block w-100" alt="The Last of Us">
+            </div>
+            <div class="carousel-item">
+                <img src="assets/img/slide1/slider-image-4.jpg" class="d-block w-100" alt="GTA V">
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+            data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+            data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+    <div class="container slider-content">
+        <div class="row justify-content-center text-center">
+            <div class="col-lg-10">
+                <h2>Property Searching Just Got So Easy</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi deserunt deleniti, ullam
+                    commodi sit ipsam laboriosam velit adipisci quibusdam aliquam teneturo!</p>
+
+                <form class="row g-3">
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" placeholder="Keyword">
+                    </div>
+                    <div class="col-md-4">
+                        <select class="form-select" aria-label="Select your city">
+                            @if (Model != null && Model.Any())
+                            {
+                                foreach (var item in Model)
+                                {
+                                    <option value="@item.Id">@item.Name</option>
+                                }
+                            }
+                            else
+                            {
+                                <option selected>No cities available</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <select class="form-select" aria-label="Property status">
+                            <option value="0">All</option>
+                            <option value="1">Rent</option>
+                            <option value="2">Buy</option>
+                        </select>
+                    </div>
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-primary w-100">Search</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
+    
+
+    <!-- Property Area -->
+    <div class="content-area recent-property py-5 bg-light">
+        <div class="container">
+            <div class="row">
+                <!-- Property Cards -->
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="card property-item">
+                            <img src="assets/img/home/buy.jfif" class="card-img-top" alt="Buy a home">
+                            <div class="card-body">
+                                <h5 class="card-title">Buy a home</h5>
+                                <p class="card-text">Find your place with an immersive photo experience and the most listings, including things you won’t find anywhere else.</p>
+                                <a href="properties-2.html" class="btn btn-primary">Browse homes</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="card property-item">
+                            <img src="assets/img/home/sell.jfif" class="card-img-top" alt="Sell a home">
+                            <div class="card-body">
+                                <h5 class="card-title">Sell a home</h5>
+                                <p class="card-text">No matter what path you take to sell your home, we can help you navigate a successful sale.</p>
+                                <a href="submit-property.html" class="btn btn-primary">See your options</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="card property-item">
+                            <img src="assets/img/home/rent.jfif" class="card-img-top" alt="Rent a home">
+                            <div class="card-body">
+                                <h5 class="card-title">Rent a home</h5>
+                                <p class="card-text">We’re creating a seamless online experience – from shopping on the largest rental network, to applying, to paying rent.</p>
+                                <a href="properties-2.html" class="btn btn-primary">Find rentals</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

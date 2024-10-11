@@ -28,15 +28,19 @@ namespace _Services.EntityMapping
         {
             return new User_Basic
             {
+                Id = user.Id,
                 F_Name = user.F_Name,
                 L_Name = user.L_Name,
+                FullName = user.FullName,
                 Email = user.Email,
+                Password = user.Password,
                 PhoneNumber = user.PhoneNumber,
                 Address = user.Address,
                 ProfilePicture = user.ProfilePicture,
 
-                Num_of_Properties = user.Properties?.Count() ?? 0,
-                Num_of_Inquiries = user.Inquiries?.Count() ?? 0
+                PropertiesId = user.Properties.Select(i => i.Id).ToList(),
+                InquiriesId = user.Inquiries.Select(i => i.Id).ToList(),
+                FavoriteId = user.Favorite.Select(i => i.PropertyId).ToList()
 
                 //Num_of_Properties = _db.Properties.Where(p => p.OwnerId == user.Id)?.Count() ?? 0,
                 //Num_of_Inquiries = _db.Inquiries.Where(p => p.UserId == user.Id)?.Count() ?? 0

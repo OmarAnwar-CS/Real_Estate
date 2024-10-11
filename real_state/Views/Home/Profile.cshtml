@@ -1,0 +1,58 @@
+﻿@model MVC_Project.Models.User_Basic
+@{
+    ViewData["Title"] = "My Profile";
+    ViewData["Page Header"] = "My Profile";
+}
+
+<!-- Profile Form (Merged Content) -->
+<div class="container" style="top: 90px; margin-top: 20px; margin-bottom: 20px;">
+    <div class="row">
+        <!-- Sidebar Section -->
+        <div class="col-lg-4 col-md-12 col-sm-12">
+            <div class="dashboard-nav-2" style="min-height: 695px;">
+                <!-- Header -->
+                <div class="header text-center py-4">
+                    @* <h2>@User.Identity.Name</h2> <!-- Display logged-in user's name --> *@
+                    <h2>@Model.F_Name</h2> <!-- Display logged-in user's name -->
+                </div>
+
+                <!-- Profile Photo Section -->
+                <div class="profile-photo">
+                    <img src="@Model.ProfilePicture" alt="avatar" class="img-fluid">
+                    <div class="change-photo-btn">
+                        <label class="btn btn-secondary btn-sm">
+                            <i class="fas fa-upload"></i> Upload Photo
+                            <input type="file" class="d-none">
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Sidebar Links -->
+                <div class="detail clearfix">
+                    <ul>
+                        <li><a asp-controller="Profile" asp-action="Index" class="active"><i class="fa fa-user"></i> My Profile</a></li>
+                        <li><a asp-controller="Property" asp-action="MyProperties"><i class="fa fa-building"></i> My Property</a></li>
+                        <li><a asp-controller="Property" asp-action="FavoritedProperties"><i class="fa fa-heart"></i> Favorited Property</a></li>
+                        <li><a asp-controller="Messages" asp-action="Index"><i class="fa fa-envelope me-1"></i> Messages</a></li>
+                        <li><a asp-controller="Property" asp-action="SubmitProperty"><i class="fa fa-plus"></i> Submit Property</a></li>
+                        <li><a asp-controller="Account" asp-action="ChangePassword"><i class="fa fa-lock"></i> Change Password</a></li>
+                        <li><a asp-controller="Account" asp-action="Logout"><i class="fa fa-sign-out"></i> Log Out</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content Section -->
+        <div class="col-lg-8 col-md-12 col-sm-12">
+            <div class="dashboard-content">
+                <div class="dashboard-list">
+
+                    @* <!-- This is where the main profile content will go -->
+                    @RenderBody() <!-- Placeholder for child view content -->
+ *@
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

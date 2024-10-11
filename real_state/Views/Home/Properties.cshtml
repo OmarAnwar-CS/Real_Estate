@@ -1,0 +1,225 @@
+﻿@model IEnumerable<MVC_Project.Models.City_Get>
+
+@{
+    ViewData["Title"] = "Properties";
+    ViewData["Page Header"] = "Property List";
+}
+
+<div class="properties-area recent-property" style="background-color: #FFF; margin-top: 20px; margin-bottom: 20px;">
+    <div class="container">
+        <div class="row">
+            <!-- Properties List -->
+            <div class="col-md-9 padding-top-40 properties-page">
+                <!-- Filters and Sorting -->
+                <div class="row mb-4">
+                    <div class="col-12 d-flex justify-content-between align-items-center mb-3">
+                        <div class="d-flex align-items-center">
+                            <!-- Sorting Options -->
+                            <div class="me-3">
+                                <ul class="list-unstyled d-flex mb-0">
+                                    <li class="me-2">
+                                        <a href="#" class="text-decoration-none" data-orderby="property_date" data-order="ASC">
+                                            Property Date <i class="fa fa-sort-amount-asc"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="text-decoration-none" data-orderby="property_price" data-order="DESC">
+                                            Property Price <i class="fa fa-sort-numeric-desc"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- Items Per Page -->
+                            <div class="me-3">
+                                <label for="items_per_page" class="mb-0"><b>Properties per page:</b></label>
+                                <select id="items_per_page" name="per_page" class="form-select form-select-sm">
+                                    <option value="3">3</option>
+                                    <option value="6">6</option>
+                                    <option value="9">9</option>
+                                    <option selected="selected" value="12">12</option>
+                                    <option value="15">15</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- Layout Switcher -->
+                        <div>
+                            <a class="btn btn-outline-primary btn-sm me-2" href="#" title="List View">
+                                <i class="fa fa-th-list"></i>
+                            </a>
+                            <a class="btn btn-primary btn-sm" href="#" title="Grid View">
+                                <i class="fa fa-th"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Partial View for Property List -->
+                @* @await Html.PartialAsync("PartialViewName", Model as Property_GetAll_Func) *@
+                
+
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-md-3">
+                <div class="card card-body">
+                    <!-- Search Filters -->
+                    <form class="row g-3">
+                        <div class="col-12">
+                            <input type="text" class="form-control" placeholder="Keyword">
+                        </div>
+                        <div class="col-12">
+                            <select class="form-select" aria-label="Select your city">
+                                @if (Model != null && Model.Any())
+                                {
+                                    foreach (var item in Model)
+                                    {
+                                        <option value="@item.Id">@item.Name</option>
+                                    }
+                                }
+                                else
+                                {
+                                    <option selected>No cities available</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-12">
+                            <select class="form-select" aria-label="Property Status">
+                                <option selected>Property Status</option>
+                                <option value="1">For Sale</option>
+                                <option value="2">For Rent</option>
+                            </select>
+                        </div>
+
+                        <!-- Price Range -->
+                        <div class="col-12">
+                            <label for="priceRange" class="form-label">
+                                Price Range:
+                                <span id="priceMin">@ViewData["MinPrice"]</span> -
+                                <span id="priceMax">@ViewData["MaxPrice"]</span>
+                            </label>
+                            <input type="range" class="form-range" id="priceRange" min="@ViewData["MinPrice"]" max="@ViewData["MaxPrice"]"
+                                   oninput="updatePriceValue(this.value)">
+                            <span>Selected: <span id="priceValue">0</span></span>
+                        </div>
+
+
+                        <!-- Area Size -->
+                        <div class="col-12">
+                            <label for="areaSize" class="form-label">
+                                Area Size (sq ft):
+                                <span id="areaMin">@ViewData["MinArea"]</span> -
+                                <span id="areaMax">@ViewData["MaxArea"]</span>
+                            </label>
+                            <input type="range" class="form-range" id="areaSize" min="@ViewData["MinArea"]" max="@ViewData["MaxArea"]"
+                                   oninput="updateAreaValue(this.value)">
+                            <span>Selected: <span id="areaValue">0</span></span>
+                        </div>
+
+                        
+
+                        <div class="col-12">
+                            <input type="number" class="form-control" placeholder="Beds">
+                        </div>
+                        <div class="col-12">
+                            <input type="number" class="form-control" placeholder="Baths">
+                        </div>
+                        <div class="col-12">
+                            <div class="col-md-12">
+                                <div class="col-md-4">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value=""
+                                               id="hurricane-shutters">
+                                        <label class="form-check-label" for="gym">Elevator</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value=""
+                                               id="hurricane-shutters">
+                                        <label class="form-check-label" for="gym">Furnished</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="fireplace">
+                                        <label class="form-check-label" for="air-condition">Garage</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value=""
+                                               id="hurricane-shutters">
+                                        <label class="form-check-label" for="gym">Parking</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value=""
+                                               id="hurricane-shutters">
+                                        <label class="form-check-label" for="gym">Garden</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value=""
+                                               id="hurricane-shutters">
+                                        <label class="form-check-label" for="gym">Balcony</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-7">
+
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="dual-sinks">
+                                        <label class="form-check-label" for="free-parking">Two Stories</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value=""
+                                               id="hurricane-shutters">
+                                        <label class="form-check-label" for="laundry-room">Laundry Room</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value=""
+                                               id="hurricane-shutters">
+                                        <label class="form-check-label" for="pool">Swimming Pool</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value=""
+                                               id="hurricane-shutters">
+                                        <label class="form-check-label" for="gym">Central Heating</label>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary w-100">Search</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section pageScripts {
+    <script>
+        function updatePriceValue(value) {
+            document.getElementById('priceValue').innerText = value;
+        }
+
+        function updateAreaValue(value) {
+            document.getElementById('areaValue').innerText = value;
+        }
+    </script>
+
+    @* <script>
+        $(document).ready(function () {
+            // Sorting Properties
+            $('a[data-orderby]').on('click', function (e) {
+                e.preventDefault();
+                var orderby = $(this).data('orderby');
+                var order = $(this).data('order');
+                var url = '/Home/Properties?orderby=' + orderby + '&order=' + order;
+                window.location.href = url;
+            });
+
+            // Items Per Page
+            $('#items_per_page').on('change', function () {
+                var per_page = $(this).val();
+                var url = '/Home/Properties?per_page=' + per_page;
+                window.location.href = url;
+            });
+        });
+    </script> *@
+}

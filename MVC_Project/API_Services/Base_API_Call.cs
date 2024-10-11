@@ -3,6 +3,8 @@ using System.Net.Http;
 using System.Net.Http.Json;
 using Microsoft.Extensions.Logging;
 using System.Security.Policy;
+using Newtonsoft.Json;
+using System.Text;
 
 namespace MVC_Project.API_Services
 {
@@ -10,11 +12,21 @@ namespace MVC_Project.API_Services
     {
         // Any common functionality for API calls can be placed here
         Task<IEnumerable<City_Get>> GetAllCity();
+        Task<Property_AllInfo> GetPropertyById(int Id);
         Task<IEnumerable<Properties_List>> GetPropertyList();
+        Task<IEnumerable<Properties_List>> GetPropertyList(IEnumerable<int> Id);
         Task<IEnumerable<Properties_List>> GetFilteredProperties(Filter filter);
-        Task<User_Info> GetUserInfo(int id);
+        Task CreateUserAsync(User_Create user);
+        Task<HttpResponseMessage> UpdateUserInfo(User_Info userInfo);
+        Task<User_Info> GetUserInfo(string email);
+        Task<IEnumerable<Inquity_List>> GetMassagesToUser(int Id);
+        Task<IEnumerable<Inquity_List>> GetMassagesToProperty(int Id);
+
+
 
     }
+
+
 
     internal class Base_API_Call : IBase_API_Call
     {
@@ -42,6 +54,21 @@ namespace MVC_Project.API_Services
             }
         }
 
+        public async Task<Property_AllInfo> GetPropertyById(int Id)
+        {
+            try
+            {
+                var response = await _httpClient.GetAsync($"Property/{Id}");
+                response.EnsureSuccessStatusCode();  // Ensure the response is successful
+                var result = await response.Content.ReadFromJsonAsync<Property_AllInfo>();
+                return result ?? new Property_AllInfo();  // Return empty collection if null
+            }
+            catch (Exception ex)
+            {
+                // Log exception here
+                throw new ApplicationException("An error occurred while fetching city data.", ex);
+            }
+        }
         public async Task<IEnumerable<Properties_List>> GetPropertyList()
         {
             try
@@ -49,7 +76,10 @@ namespace MVC_Project.API_Services
                 var response = await _httpClient.GetAsync("Property/GetPropertyList");
                 response.EnsureSuccessStatusCode();  // Ensure the response is successful
                 var result = await response.Content.ReadFromJsonAsync<IEnumerable<Properties_List>>();
-                return result ?? Enumerable.Empty<Properties_List>();  // Return empty collection if null
+                result = result ?? Enumerable.Empty<Properties_List>();
+                result = result.OrderByDescending(U => U.DateAdded)
+                                       .ThenBy(U => U.Price);
+                return result;  // Return empty collection if null
             }
             catch (Exception ex)
             {
@@ -58,7 +88,25 @@ namespace MVC_Project.API_Services
             }
         }
 
-
+        public async Task<IEnumerable<Properties_List>> GetPropertyList(IEnumerable<int> Id)
+        {
+            try
+            {
+                var response = await _httpClient.GetAsync("Property/GetPropertyList");
+                response.EnsureSuccessStatusCode();  // Ensure the response is successful
+                var result = await response.Content.ReadFromJsonAsync<IEnumerable<Properties_List>>();
+                result = result ?? Enumerable.Empty<Properties_List>();
+                result = result.Where(x => Id.Contains(x.Id));
+                result = result.OrderByDescending(U => U.DateAdded)
+                                       .ThenBy(U => U.Price);
+                return result;  // Return empty collection if null
+            }
+            catch (Exception ex)
+            {
+                // Log exception here
+                throw new ApplicationException("An error occurred while fetching city data.", ex);
+            }
+        }
 
         public async Task<IEnumerable<Properties_List>> GetFilteredProperties(Filter filter)
         {
@@ -71,7 +119,10 @@ namespace MVC_Project.API_Services
                 response.EnsureSuccessStatusCode();  // تأكد من نجاح الاستجابة
 
                 var result = await response.Content.ReadFromJsonAsync<IEnumerable<Properties_List>>();
-                return result ?? Enumerable.Empty<Properties_List>();  // إرجاع مجموعة فارغة في حالة وجود null
+                result = result ?? Enumerable.Empty<Properties_List>();
+                result = result.OrderByDescending(U => U.DateAdded)
+                                       .ThenBy(U => U.Price);
+                return result;  // إرجاع مجموعة فارغة في حالة وجود null
             }
             catch (Exception ex)
             {
@@ -83,14 +134,69 @@ namespace MVC_Project.API_Services
 
 
 
+        public async Task CreateUserAsync(User_Create user)
+        {
+            if (user == null)
+            {
+                throw new ArgumentNullException(nameof(user), "User object cannot be null");
+            }
+
+            try
+            {
+                // تحويل الكائن المدخل إلى JSON
+                var jsonContent = JsonConvert.SerializeObject(user);
+                var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+
+                // إرسال الطلب إلى الـ API
+                var response = await _httpClient.PostAsync("User", content);
+
+                // التحقق من نجاح الاستجابة
+                response.EnsureSuccessStatusCode();
+
+                // تسجيل معلومات في حالة نجاح الطلب
+                Console.WriteLine($"User {user.Email} created successfully.");
+            }
+            catch (HttpRequestException httpEx)
+            {
+                // في حالة وجود خطأ HTTP
+                Console.WriteLine($"HTTP Request Error: {httpEx.Message}");
+                throw new ApplicationException("An error occurred while creating the user.", httpEx);
+            }
+            catch (Exception ex)
+            {
+                // معالجة الأخطاء الأخرى
+                Console.WriteLine($"General Error: {ex.Message}");
+                throw new ApplicationException("An error occurred while processing the request.", ex);
+            }
+        }
+        public async Task<HttpResponseMessage> UpdateUserInfo(User_Info userInfo)
+        {
+            // تأكد من ملء خصائص المستخدم
+            User_Update user = new User_Update
+            {
+                F_Name = userInfo.F_Name,
+                L_Name = userInfo.L_Name,
+                PhoneNumber = userInfo.PhoneNumber,
+                Email = userInfo.Email,
+                Address = userInfo.Address,
+                ProfilePicture = "" // تأكد من إضافة هذه الخاصية إذا كانت موجودة في User_Update
+            };
+
+            // تحويل الكائن إلى JSON
+            var json = JsonConvert.SerializeObject(user);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            // استخدام الـ id لتحديث المستخدم، و تأكد من أن URL متوافق
+            return await _httpClient.PutAsync($"User/UpdateById{userInfo.Id}", content);
+        }
 
 
-        //https://localhost:7197/api/User?id=1
-        public async Task<User_Info> GetUserInfo(int id)
+
+        public async Task<User_Info> GetUserInfo(string email)
         {
             try
             {
-                var response = await _httpClient.GetAsync($"User?id={id}");
+                var response = await _httpClient.GetAsync($"User/GetUserByEmail?email={email}");
                 response.EnsureSuccessStatusCode();  // Ensure the response is successful
                 var result = await response.Content.ReadFromJsonAsync<User_Info>();
                 return result ?? new User_Info();  // Return empty collection if null
@@ -101,6 +207,43 @@ namespace MVC_Project.API_Services
                 throw new ApplicationException("An error occurred while fetching city data.", ex);
             }
         }
+
+        public async Task<IEnumerable<Inquity_List>> GetMassagesToUser(int Id)
+        {
+            try
+            {
+                var response = await _httpClient.GetAsync($"Inquiry/user/{Id}");
+                response.EnsureSuccessStatusCode();  // Ensure the response is successful
+                var result = await response.Content.ReadFromJsonAsync<IEnumerable<Inquity_List>>();
+                result = result ?? Enumerable.Empty<Inquity_List>();
+                result = result.OrderByDescending(U => U.DateSent);
+                return result;  // Return empty collection if null
+            }
+            catch (Exception ex)
+            {
+                // Log exception here
+                throw new ApplicationException("An error occurred while fetching city data.", ex);
+            }
+        }
+
+        public async Task<IEnumerable<Inquity_List>> GetMassagesToProperty(int Id)
+        {
+            try
+            {
+                var response = await _httpClient.GetAsync($"Inquiry/property/{Id}");
+                response.EnsureSuccessStatusCode();  // Ensure the response is successful
+                var result = await response.Content.ReadFromJsonAsync<IEnumerable<Inquity_List>>();
+                result = result ?? Enumerable.Empty<Inquity_List>();
+                result = result.OrderByDescending(U => U.DateSent);
+                return result;  // Return empty collection if null
+            }
+            catch (Exception ex)
+            {
+                // Log exception here
+                throw new ApplicationException("An error occurred while fetching city data.", ex);
+            }
+        }
+
     }
 }
 

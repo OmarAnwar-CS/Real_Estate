@@ -8,7 +8,10 @@ namespace _Services.Models.Property
     {
         public int Id { get; set; }
         public int OwnerId { get; set; }
-        public User_Basic Owner { get; set; }
+        public string OwnerName { get; set; }
+        public string Email { get; set; }
+        public string PhoneNumber { get; set; }
+        public string ProfilePicture { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public decimal Price { get; set; }
@@ -21,7 +24,16 @@ namespace _Services.Models.Property
         public int? YearBuilt { get; set; }
         public DateTime DateAdded { get; set; }
         public Status Status { get; set; }
-        public Amenities_Out Amenities { get; set; }
+        public bool HasGarage { get; set; }
+        public bool Two_Stories { get; set; }
+        public bool Laundry_Room { get; set; }
+        public bool HasPool { get; set; }
+        public bool HasGarden { get; set; }
+        public bool HasElevator { get; set; }
+        public bool HasBalcony { get; set; }
+        public bool HasParking { get; set; }
+        public bool HasCentralHeating { get; set; }
+        public bool IsFurnished { get; set; }
         public IEnumerable<String> Image { get; set; }
 
     }

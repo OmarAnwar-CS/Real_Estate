@@ -19,9 +19,9 @@ body {
     color: #f8f9fa !important;
 }
 
-.navbar-nav .nav-link:hover {
-    color: #ffc107 !important;
-}
+    .navbar-nav .nav-link:hover {
+        color: #ffc107 !important;
+    }
 
 /* Buttons */
 .btn-outline-success,
@@ -34,20 +34,20 @@ body {
     color: #28a745;
 }
 
-.btn-outline-success:hover {
-    background-color: #28a745;
-    color: #fff;
-}
+    .btn-outline-success:hover {
+        background-color: #28a745;
+        color: #fff;
+    }
 
 .btn-outline-primary {
     border-color: #007bff;
     color: #007bff;
 }
 
-.btn-outline-primary:hover {
-    background-color: #007bff;
-    color: #fff;
-}
+    .btn-outline-primary:hover {
+        background-color: #007bff;
+        color: #fff;
+    }
 
 .btn-primary {
     background-color: #007bff;
@@ -55,19 +55,19 @@ body {
     border-radius: 10px;
 }
 
-.btn-primary:hover {
-    background-color: #0056b3;
-    border-color: #004085;
-}
+    .btn-primary:hover {
+        background-color: #0056b3;
+        border-color: #004085;
+    }
 
 .btn.button-theme {
     background-color: #007bff;
     color: white;
 }
 
-.btn.button-theme:hover {
-    background-color: #0056b3;
-}
+    .btn.button-theme:hover {
+        background-color: #0056b3;
+    }
 
 /* Carousel */
 .carousel-item img {
@@ -94,15 +94,15 @@ body {
     max-width: 800px;
 }
 
-.slider-content h2 {
-    color: #343a40;
-    margin-bottom: 20px;
-}
+    .slider-content h2 {
+        color: #343a40;
+        margin-bottom: 20px;
+    }
 
-.slider-content p {
-    color: #6c757d;
-    margin-bottom: 30px;
-}
+    .slider-content p {
+        color: #6c757d;
+        margin-bottom: 30px;
+    }
 
 /* Form Controls */
 .form-control,
@@ -111,11 +111,11 @@ body {
     border: 1px solid #ced4da;
 }
 
-.form-control:focus,
-.form-select:focus {
-    border-color: #007bff;
-    box-shadow: none;
-}
+    .form-control:focus,
+    .form-select:focus {
+        border-color: #007bff;
+        box-shadow: none;
+    }
 
 /* Property Items */
 .property-item {
@@ -124,21 +124,21 @@ body {
     height: 100%;
 }
 
-.property-item img {
-    height: 250px;
-    width: 100%;
-    object-fit: cover;
-}
+    .property-item img {
+        height: 250px;
+        width: 100%;
+        object-fit: cover;
+    }
 
-.property-item .card-body {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    flex-grow: 1;
-    padding: 1.25rem;
-    text-align: center;
-}
+    .property-item .card-body {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        flex-grow: 1;
+        padding: 1.25rem;
+        text-align: center;
+    }
 
 /* Pagination */
 .pagination {
@@ -154,13 +154,13 @@ body {
     margin-top: auto;
 }
 
-.footer a {
-    color: #ffc107;
-}
+    .footer a {
+        color: #ffc107;
+    }
 
-.footer a:hover {
-    color: #e0a800;
-}
+        .footer a:hover {
+            color: #e0a800;
+        }
 
 /* Page Head */
 .page-head {
@@ -189,14 +189,14 @@ body {
     transition: background-color 0.3s, color 0.3s;
 }
 
-.filter-toggle:hover {
-    background-color: #007bff;
-    color: #fff;
-}
+    .filter-toggle:hover {
+        background-color: #007bff;
+        color: #fff;
+    }
 
-.filter-toggle i {
-    margin-right: 8px;
-}
+    .filter-toggle i {
+        margin-right: 8px;
+    }
 
 .filter-checkbox-label {
     margin-right: 10px;
@@ -247,9 +247,9 @@ body {
     padding: 0;
 }
 
-.amenities ul li {
-    margin-bottom: 10px;
-}
+    .amenities ul li {
+        margin-bottom: 10px;
+    }
 
 /* Owner Details */
 .owner-details img {
@@ -279,11 +279,11 @@ body {
     text-align: center;
 }
 
-.profile-photo img {
-    border-radius: 50%;
-    width: 100px;
-    height: 100px;
-}
+    .profile-photo img {
+        border-radius: 50%;
+        width: 100px;
+        height: 100px;
+    }
 
 .change-photo-btn {
     margin-top: 10px;
@@ -306,20 +306,20 @@ body {
     padding: 0;
 }
 
-.detail ul li a {
-    display: block;
-    padding: 10px;
-    text-decoration: none;
-    color: #333;
-    border: 1px solid #ddd;
-    margin-bottom: 10px;
-    border-radius: 5px;
-}
+    .detail ul li a {
+        display: block;
+        padding: 10px;
+        text-decoration: none;
+        color: #333;
+        border: 1px solid #ddd;
+        margin-bottom: 10px;
+        border-radius: 5px;
+    }
 
-.detail ul li a.active {
-    background-color: #007bff;
-    color: white;
-}
+        .detail ul li a.active {
+            background-color: #007bff;
+            color: white;
+        }
 
 /* Dashboard Content */
 .dashboard-content {
@@ -364,10 +364,10 @@ body {
     margin-top: 15px;
 }
 
-.message-body p {
-    font-size: 14px;
-    color: #555;
-}
+    .message-body p {
+        font-size: 14px;
+        color: #555;
+    }
 
 .sender-name {
     font-weight: bold;
@@ -390,10 +390,10 @@ body {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-}
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
 
 .card-img-left {
     border-radius: 5px 0 0 5px;
@@ -428,13 +428,11 @@ body {
 
 /* Active sidebar link */
 #sidebar-links li.active a {
-    color: blue; /* لون النص عند التفعيل */
+    color: white; /* لون النص عند التفعيل */
+    background: #007bff;
+    border-radius: 10px;
     font-weight: bold; /* خيار إضافي */
 }
 
 
-/* تغيير لون الرابط عند إضافة كلاس active للـ <li> */
-#sidebar-links li.active a {
-    color: blue; /* اللون الأزرق */
-    font-weight: bold; /* إضافة خط عريض للرابط النشط */
-}
+

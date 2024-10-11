@@ -61,10 +61,12 @@ namespace _Services.EntityMapping
                 Title = p.Title,
                 Price = p.Price,
                 City = p.City.Name,
+                Address = p.Location,
                 Area = p.Area,
                 Bedrooms = p.Bedrooms,
                 Bathrooms = p.Bathrooms,
                 Status = p.Status,
+                DateAdded = p.DateAdded,
                 Image = p.Images.Select(i => i.Url).FirstOrDefault()?.ToString() ?? "No Image"
             });
 
@@ -78,12 +80,15 @@ namespace _Services.EntityMapping
             {
                 Id = property.Id,
                 OwnerId = property.OwnerId,
-                Owner = UserMapping.UserToUser_Basic(property.Owner),
+                OwnerName = property.Owner?.FullName ?? "No Owner",
+                Email = property.Owner?.Email ?? "No Email",
+                PhoneNumber = property.Owner?.PhoneNumber ?? "No Phone",
+                ProfilePicture = property.Owner?.ProfilePicture ?? "No Picture",
                 Title = property.Title,
                 Description = property.Description,
                 Price = property.Price,
                 Location = property.Location,
-                City = property.City?.Name??"no city",
+                City = property.City?.Name ?? "No City",
                 Area = property.Area,
                 PropertyType = property.PropertyType,
                 Bedrooms = property.Bedrooms,
@@ -91,11 +96,20 @@ namespace _Services.EntityMapping
                 YearBuilt = property.YearBuilt,
                 DateAdded = property.DateAdded,
                 Status = property.Status,
-                Amenities = AmenitiesMapping.MapToAmenitiesOut(property.Amenities),
-                Image = property.Images.Select(i => i.Url).ToList()
-
+                HasGarage = property.Amenities?.HasGarage ?? false,
+                Two_Stories = property.Amenities?.Two_Stories ?? false,
+                Laundry_Room = property.Amenities?.Laundry_Room ?? false,
+                HasPool = property.Amenities?.HasPool ?? false,
+                HasGarden = property.Amenities?.HasGarden ?? false,
+                HasElevator = property.Amenities?.HasElevator ?? false,
+                HasBalcony = property.Amenities?.HasBalcony ?? false,
+                HasParking = property.Amenities?.HasParking ?? false,
+                HasCentralHeating = property.Amenities?.HasCentralHeating ?? false,
+                IsFurnished = property.Amenities?.IsFurnished ?? false,
+                Image = property.Images?.Select(i => i.Url) ?? Enumerable.Empty<string>()
             };
         }
+
 
 
     }

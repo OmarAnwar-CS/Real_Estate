@@ -1,0 +1,145 @@
+﻿@model MVC_Project.Models.Property_Create
+
+<h4>Property_Create</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="OwnerId" class="control-label"></label>
+                <input asp-for="OwnerId" class="form-control" />
+                <span asp-validation-for="OwnerId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Location" class="control-label"></label>
+                <input asp-for="Location" class="form-control" />
+                <span asp-validation-for="Location" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="City" class="control-label"></label>
+                <input asp-for="City" class="form-control" />
+                <span asp-validation-for="City" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Area" class="control-label"></label>
+                <input asp-for="Area" class="form-control" />
+                <span asp-validation-for="Area" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="PropertyType" class="control-label"></label>
+                <input asp-for="PropertyType" class="form-control" />
+                <span asp-validation-for="PropertyType" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Bedrooms" class="control-label"></label>
+                <input asp-for="Bedrooms" class="form-control" />
+                <span asp-validation-for="Bedrooms" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Bathrooms" class="control-label"></label>
+                <input asp-for="Bathrooms" class="form-control" />
+                <span asp-validation-for="Bathrooms" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="YearBuilt" class="control-label"></label>
+                <input asp-for="YearBuilt" class="form-control" />
+                <span asp-validation-for="YearBuilt" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Status" class="control-label"></label>
+                <input asp-for="Status" class="form-control" />
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+
+            <!-- Amenities Fields -->
+            <h4>Amenities</h4>
+            <div class="form-check">
+                <input asp-for="Amenities.HasGarage" class="form-check-input" type="checkbox" />
+                <label asp-for="Amenities.HasGarage" class="form-check-label">Has Garage</label>
+            </div>
+            <div class="form-check">
+                <input asp-for="Amenities.Two_Stories" class="form-check-input" type="checkbox" />
+                <label asp-for="Amenities.Two_Stories" class="form-check-label">Two Stories</label>
+            </div>
+            <div class="form-check">
+                <input asp-for="Amenities.Laundry_Room" class="form-check-input" type="checkbox" />
+                <label asp-for="Amenities.Laundry_Room" class="form-check-label">Laundry Room</label>
+            </div>
+            <!-- Add more amenities fields similarly... -->
+            <h4>Property Images</h4>
+            <div id="imageFields">
+                <div class="form-group">
+                    <label>Image URL</label>
+                    <input name="Images[0].ImageUrl" class="form-control" />
+                </div>
+            </div>
+            <button type="button" id="addImageField" class="btn btn-secondary">Add Image</button>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            let imageFieldIndex = 1; // Initial index for images
+
+            // Function to add new image input field
+            $('#addImageField').click(function () {
+                const newImageField = `
+                    <div class="form-group">
+                        <label>Image URL</label>
+                        <input name="Images[${imageFieldIndex}].ImageUrl" class="form-control" />
+                        <button type="button" class="removeImageField btn btn-danger btn-sm mt-2">Remove</button>
+                    </div>`;
+                $('#imageFields').append(newImageField);
+                imageFieldIndex++;
+            });
+
+            // Function to remove an image input field
+            $(document).on('click', '.removeImageField', function () {
+                $(this).parent().remove();
+            });
+        });
+    </script>
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

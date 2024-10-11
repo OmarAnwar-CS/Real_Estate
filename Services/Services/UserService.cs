@@ -39,8 +39,32 @@ namespace Application.Services
             }
         }
 
+        public User_Basic GetUserByEmail(string email)
+        {
+
+            try
+            {
+                var user = _unitOfWork.User.GetByEmail(email);
+                if (user == null)
+                {
+                    throw new KeyNotFoundException("User not found.");
+                }
+                return UserMapping.UserToUser_Basic(user);
+            }
+            catch (Exception ex)
+            {
+                // Log exception here
+                throw new ApplicationException("An error occurred while retrieving the user.", ex);
+            }
+        }
+
+
         public void CreateUser(User_Create _user)
         {
+
+            _user.Address = "Address is Empty";
+            _user.ProfilePicture = "https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg?size=338&ext=jpg&ga=GA1.1.2008272138.1728518400&semt=ais_hybrid";
+
             ValidateUser(_user);
 
             try
@@ -88,6 +112,36 @@ namespace Application.Services
             }
         }
 
+        public void UpdateUser(string email, User_Update _user)
+        {
+            try
+            {
+                var User = _unitOfWork.User.GetByEmail(email);
+                if (User == null)
+                    throw new KeyNotFoundException("User not found.");
+                if (!string.IsNullOrEmpty(_user.F_Name))
+                    User.F_Name = _user.F_Name;
+                if (!string.IsNullOrEmpty(_user.L_Name))
+                    User.L_Name = _user.L_Name;
+                if (!string.IsNullOrEmpty(_user.Email))
+                    User.Email = _user.Email;
+                if (!string.IsNullOrEmpty(_user.PhoneNumber))
+                    User.PhoneNumber = _user.PhoneNumber;
+                if (!string.IsNullOrEmpty(_user.Address))
+                    User.Address = _user.Address;
+                if (!string.IsNullOrEmpty(_user.ProfilePicture))
+                    User.ProfilePicture = _user.ProfilePicture;
+
+
+                _unitOfWork.User.Update(User);
+                _unitOfWork.Save();
+            }
+            catch (Exception ex)
+            {
+                // Log exception here
+                throw new ApplicationException("An error occurred while updating the user.", ex);
+            }
+        }
         public void DeleteUser(int id)
         {
             try
@@ -107,6 +161,27 @@ namespace Application.Services
                 throw new ApplicationException("An error occurred while deleting the user.", ex);
             }
         }
+
+        public void DeleteUser(string email)
+        {
+            try
+            {
+                var user = _unitOfWork.User.GetByEmail(email);
+                if (user == null)
+                {
+                    throw new KeyNotFoundException("User not found.");
+                }
+
+                _unitOfWork.User.Delete(user.Id);
+                _unitOfWork.Save();
+            }
+            catch (Exception ex)
+            {
+                // Log exception here
+                throw new ApplicationException("An error occurred while deleting the user.", ex);
+            }
+        }
+
 
         public User_Authenticate AuthenticateUser(string email, string password)
         {
@@ -217,10 +292,10 @@ namespace Application.Services
                 throw new ArgumentException("User email is already registered.", nameof(user.Email));
 
             if (!string.IsNullOrEmpty(user.Address) && user.Address.Length > 100)
-                throw new ArgumentException("User address must not exceed 100 characters.", nameof(user.Address));
+                user.Address = "Address is Empty";
 
             if (!string.IsNullOrEmpty(user.ProfilePicture) && user.ProfilePicture.Length > 100)
-                throw new ArgumentException("Profile picture URL is required.", nameof(user.ProfilePicture));
+                user.ProfilePicture = "https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg?size=338&ext=jpg&ga=GA1.1.2008272138.1728518400&semt=ais_hybrid";
 
         }
 

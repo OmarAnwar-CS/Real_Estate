@@ -79,6 +79,10 @@ namespace application.DataAccess
                 .IsUnique();
 
             modelBuilder.Entity<User>()
+                .HasIndex(u => u.Email)
+                .IsUnique();
+
+            modelBuilder.Entity<User>()
                 .Property(u => u.FullName)
                 .HasComputedColumnSql("[F_Name] + ' ' + [L_Name]");
         }
