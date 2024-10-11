@@ -13,6 +13,7 @@ namespace MVC_Project.API_Services
         Task<IEnumerable<Properties_List>> GetPropertyList();
         Task<IEnumerable<Properties_List>> GetFilteredProperties(Filter filter);
         Task<User_Info> GetUserInfo(int id);
+        Task<IEnumerable<Properties_List>> GetSortedPropertyPriceList();
 
     }
 
@@ -58,8 +59,21 @@ namespace MVC_Project.API_Services
             }
         }
 
-
-
+        public async Task<IEnumerable<Properties_List>> GetSortedPropertyPriceList()
+        {
+            try
+            {
+                var response = await _httpClient.GetAsync("Property/GetPropertyList");
+                response.EnsureSuccessStatusCode();  // Ensure the response is successful
+                var result = await response.Content.ReadFromJsonAsync<IEnumerable<Properties_List>>();
+                return result.OrderBy(p=>p.Price) ?? Enumerable.Empty<Properties_List>();  // Return empty collection if null
+            }
+            catch (Exception ex)
+            {
+                // Log exception here
+                throw new ApplicationException("An error occurred while fetching city data.", ex);
+            }
+        }
         public async Task<IEnumerable<Properties_List>> GetFilteredProperties(Filter filter)
         {
             var url = $"Property/GetPropertiesWithFilter?keyword={filter.Keyword}&city={filter.City}&status={filter.Status}&maxPrice={filter.PriceRange}&maxArea={filter.AreaSize}&maxBaths={filter.Baths}&maxBed={filter.Beds}&HasGarage={filter.HasGarage}&Two_Stories={filter.Two_Stories}&Laundry_Room={filter.Laundry_Room}&HasPool={filter.HasPool}&HasGarden={filter.HasGarden}&HasElevator={filter.HasElevator}&HasBalcony={filter.HasBalcony}&HasParking={filter.HasParking}&HasCentralHeating={filter.HasCentralHeating}&IsFurnished={filter.IsFurnished}";
