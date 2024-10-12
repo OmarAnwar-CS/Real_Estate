@@ -60,7 +60,8 @@ namespace Application.Services
                 var property = _unitOfWork.Property.GetById(Id);
                 if (property == null)
                 {
-                    throw new KeyNotFoundException("Property not found.");
+                    //throw new KeyNotFoundException("Property not found.");
+                    return null;
                 }
                 return PropertyMapping.MapToPropertyAllInfo(property);
             }
