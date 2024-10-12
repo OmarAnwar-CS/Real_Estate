@@ -44,50 +44,6 @@ namespace MVC_Project.Controllers
 
             return View(viewModel);
         }
-        //public async Task<IActionResult> PropertiesFiltered(string? keyWord = null, string? city = null, int? status = null,
-
-        //                                       decimal? maxPrice = null, double? maxArea = null,
-        //                                       int? maxBaths = null, int? maxBed = null,
-
-        //                                       bool HasGarage = false, bool Two_Stories = false, bool Laundry_Room = false,
-        //                                       bool HasPool = false, bool HasGarden = false, bool HasElevator = false,
-        //                                       bool HasBalcony = false, bool HasParking = false, bool HasCentralHeating = false, bool IsFurnished = false)
-        //{
-        //    Filter filter = new Filter
-        //    {
-
-        //        Status = status == 0 ? null : (status == 1 ? Status.rent : (status == 2 ? Status.buy : null)),
-        //        City = city != "All" ? city : null,
-        //        Keyword = keyWord.IsNullOrEmpty() ? null : keyWord,
-        //        PriceRange = maxPrice != 0 ? maxPrice : null,
-        //        AreaSize = maxArea != 0 ? maxArea : null,
-        //        Beds = maxBed != 0 ? maxBed : null,
-        //        Baths = maxBaths != 0 ? maxBaths : null,
-        //        HasGarage = HasGarage,
-        //        Two_Stories = Two_Stories,
-        //        Laundry_Room = Laundry_Room,
-        //        HasPool = HasPool,
-        //        HasGarden = HasGarden,
-        //        HasElevator = HasElevator,
-        //        HasBalcony = HasBalcony,
-        //        HasParking = HasParking,
-        //        HasCentralHeating = HasCentralHeating,
-        //        IsFurnished = IsFurnished
-
-        //    };
-
-
-        //    var properties = await _base_API_Call.GetFilteredProperties(filter);
-        //    var cityList = await _base_API_Call.GetAllCity();
-
-        //    var viewModel = new PropertyViewModel
-        //    {
-        //        Properties = properties,
-        //        Cites = cityList
-        //    };
-
-        //    return View(viewModel);
-        //}
 
         public async Task<IActionResult> PropertyiesPartial(string? keyWord = null, string? city = null, int? status = null,
                                                decimal? maxPrice = null, double? maxArea = null,
@@ -96,9 +52,9 @@ namespace MVC_Project.Controllers
                                                bool HasPool = false, bool HasGarden = false, bool HasElevator = false,
                                                bool HasBalcony = false, bool HasParking = false, bool HasCentralHeating = false, bool IsFurnished = false)
         {
-            Filter filter = new Filter{
-
-                Status = status == 0 ? null:(status == 1 ? Status.rent : (status == 2 ? Status.buy : null)),
+            Filter filter = new Filter
+            {
+                Status = status == 0 ? null : (status == 1 ? Status.rent : (status == 2 ? Status.buy : null)),
                 City = city != "All" ? city : null,
                 Keyword = string.IsNullOrEmpty(keyWord) ? null : keyWord,
                 PriceRange = maxPrice != 0 ? maxPrice : null,
@@ -117,16 +73,10 @@ namespace MVC_Project.Controllers
                 IsFurnished = IsFurnished
             };
            
-
             var properties = await _base_API_Call.GetFilteredProperties(filter);
             return PartialView("/Views/Partial_Views/_propertyListPartial.cshtml", properties);
         }
 
-        public async Task<IActionResult> SortedProperties()
-        {
-            var properyList = await _base_API_Call.GetSortedPropertyPriceList();
-            return PartialView("/Views/Partial_Views/_propertyListPartial.cshtml",properyList);
-        }
 
 
         public async Task<IActionResult> PropertyDetails(int id) // ???? ?? ?? ??? ?????? ?? "PropertyDetails"

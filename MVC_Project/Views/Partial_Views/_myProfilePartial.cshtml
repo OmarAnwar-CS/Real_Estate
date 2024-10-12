@@ -38,7 +38,7 @@
                         </div>
                     </div>
                     <div class="send-btn">
-                        <button type="button" id="submitBtn" class="btn btn-md button-theme">Send Changes</button>
+                        <button type="submit" id="submitBtn" class="btn btn-md button-theme">Send Changes</button>
                     </div>
                 </div>
             </form>
@@ -49,34 +49,36 @@
 @section Scripts {
     <script>
         $(document).ready(function () {
-            $('#submitBtn').click(function () {
-                // تجميع بيانات النموذج
+            $('#profileForm').submit(function (e) {
+                e.preventDefault(); // Prevent default form submission
+
+                // Collect form data
                 var userInfo = {
                     F_Name: $('#F_Name').val(),
                     L_Name: $('#L_Name').val(),
                     Email: $('#Email').val(),
                     PhoneNumber: $('#PhoneNumber').val(),
                     Address: $('#Address').val(),
-                    ProfilePicture: "" // يمكنك إضافة صورة في حال احتجت لذلك
+                    ProfilePicture: "" // Handle profile picture if needed
                 };
 
-                console.log(userInfo); // عرض بيانات userInfo في الـ console
+                console.log(userInfo); // Log userInfo data to console
 
-                // قراءة قيمة Id الخاصة بالمستخدم من الحقل المخفي
+                // Get the user's Id from the hidden field
                 var userId = '@Model.Id';
 
-                // إرسال طلب AJAX إلى الـ API مباشرة
+                // AJAX request to update profile using API
                 $.ajax({
-                    url: 'https://localhost:7197/api/User/UpdateById/' + userId,
+                    url: '@Url.Action("UpdateById", "User")/' + userId, // Use route to generate API URL
                     type: 'PUT',
                     contentType: 'application/json',
                     data: JSON.stringify(userInfo),
                     success: function (response) {
                         alert('Profile updated successfully!');
-                        // يمكنك إعادة تحميل الـ Partial View أو تحديث جزء من الصفحة هنا
+                        // Optionally, reload a part of the page or redirect
                     },
                     error: function (xhr, status, error) {
-                        console.error(xhr); // عرض تفاصيل الخطأ في الـ console
+                        console.error(xhr); // Log error details to console
                         alert('Failed to update profile. Please try again.');
                     }
                 });
