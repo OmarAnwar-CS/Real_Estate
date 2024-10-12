@@ -113,14 +113,14 @@ namespace API_Project.Controllers
         public IActionResult GetPropertiesWithFilter(string? keyWord = null, string? city = null, Status? status = null,
 
                                                decimal? maxPrice = null, double? maxArea = null,
-                                               int? maxBaths = null, int? maxBed = null,
+                                               int? minBaths = null, int? minBed = null,
 
                                                bool HasGarage = false, bool Two_Stories = false, bool Laundry_Room = false,
                                                bool HasPool = false, bool HasGarden = false, bool HasElevator = false,
                                                bool HasBalcony = false, bool HasParking = false, bool HasCentralHeating = false, bool IsFurnished = false)
         {
 
-            var properties = _propertyService.GetPropertiesWithFilter(keyWord, city, status, maxPrice, maxArea, maxBaths, maxBed, HasGarage, Two_Stories, Laundry_Room, HasPool, HasGarden, HasElevator, HasBalcony, HasParking, HasCentralHeating, IsFurnished);
+            var properties = _propertyService.GetPropertiesWithFilter(keyWord, city, status, maxPrice, maxArea, minBaths, minBed, HasGarage, Two_Stories, Laundry_Room, HasPool, HasGarden, HasElevator, HasBalcony, HasParking, HasCentralHeating, IsFurnished);
             return Ok(properties);
         }
 

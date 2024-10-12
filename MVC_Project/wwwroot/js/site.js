@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const filterResultDiv = document.getElementById("properties");
 
         // Send data to the server via AJAX
-        const url = `/Home/PropertyiesPartial?keyword=${keyword}&city=${city}&status=${status}&maxPrice=${priceRange}&maxArea=${areaSize}&maxBaths=${bathrooms}&maxBed=${bedrooms}&HasGarage=${hasGarage}&Two_Stories=${twoStories}&Laundry_Room=${laundryRoom}&HasPool=${hasPool}&HasGarden=${hasGarden}&HasElevator=${hasElevator}&HasBalcony=${hasBalcony}&HasParking=${hasParking}&HasCentralHeating=${centralHeating}&IsFurnished=${isFurnished}`;
+        const url = `/Home/PropertyiesPartial?keyword=${keyword}&city=${city}&status=${status}&maxPrice=${priceRange}&maxArea=${areaSize}&minBaths=${bathrooms}&minBed=${bedrooms}&HasGarage=${hasGarage}&Two_Stories=${twoStories}&Laundry_Room=${laundryRoom}&HasPool=${hasPool}&HasGarden=${hasGarden}&HasElevator=${hasElevator}&HasBalcony=${hasBalcony}&HasParking=${hasParking}&HasCentralHeating=${centralHeating}&IsFurnished=${isFurnished}`;
 
         // Fetch data and update property list
         try {

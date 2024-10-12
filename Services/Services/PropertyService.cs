@@ -275,7 +275,7 @@ namespace Application.Services
         public IEnumerable<Properties_List> GetPropertiesWithFilter(string? keyWord = null, string? city = null, Status? status = null,
 
                                                decimal? maxPrice = null, double? maxArea = null,
-                                               int? maxBaths = null, int? maxBed = null,
+                                               int? minBaths = null, int? minBed = null,
 
                                                bool HasGarage = false, bool Two_Stories = false, bool Laundry_Room = false,
                                                bool HasPool = false, bool HasGarden = false, bool HasElevator = false,
@@ -284,7 +284,7 @@ namespace Application.Services
 
             try
             {
-                var properties = _unitOfWork.Property.GetPropertiesWithFilter(keyWord, city, status, null , maxPrice, null, maxArea, null, maxBaths, null, maxBed, HasGarage, Two_Stories, Laundry_Room, HasPool, HasGarden, HasElevator, HasBalcony, HasParking, HasCentralHeating, IsFurnished);
+                var properties = _unitOfWork.Property.GetPropertiesWithFilter(keyWord, city, status, null , maxPrice, null, maxArea, minBaths, null, minBed, null, HasGarage, Two_Stories, Laundry_Room, HasPool, HasGarden, HasElevator, HasBalcony, HasParking, HasCentralHeating, IsFurnished);
                 return PropertyMapping.MapToPropertyList(properties);
             }
             catch (Exception ex)

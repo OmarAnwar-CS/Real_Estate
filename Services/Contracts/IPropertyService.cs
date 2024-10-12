@@ -38,7 +38,7 @@ namespace _Services.Contracts
         IEnumerable<Properties_List> GetPropertiesWithFilter(string? keyWord = null, string? city = null, Status? status = null,
 
                                                decimal? maxPrice = null, double? maxArea = null,
-                                               int? maxBaths = null, int? maxBed = null,
+                                               int? minBaths = null, int? minBed = null,
 
                                                bool HasGarage = false, bool Two_Stories = false, bool Laundry_Room = false,
                                                bool HasPool = false, bool HasGarden = false, bool HasElevator = false,

@@ -47,7 +47,7 @@ namespace MVC_Project.Controllers
 
         public async Task<IActionResult> PropertyiesPartial(string? keyWord = null, string? city = null, int? status = null,
                                                decimal? maxPrice = null, double? maxArea = null,
-                                               int? maxBaths = null, int? maxBed = null,
+                                               int? minBaths = null, int? minBed = null,
                                                bool HasGarage = false, bool Two_Stories = false, bool Laundry_Room = false,
                                                bool HasPool = false, bool HasGarden = false, bool HasElevator = false,
                                                bool HasBalcony = false, bool HasParking = false, bool HasCentralHeating = false, bool IsFurnished = false)
@@ -59,8 +59,8 @@ namespace MVC_Project.Controllers
                 Keyword = string.IsNullOrEmpty(keyWord) ? null : keyWord,
                 PriceRange = maxPrice != 0 ? maxPrice : null,
                 AreaSize = maxArea != 0 ? maxArea : null,
-                Beds = maxBed != 0 ? maxBed : null,
-                Baths = maxBaths != 0 ? maxBaths : null,
+                Beds = minBed != 0 ? minBed : null,
+                Baths = minBaths != 0 ? minBaths : null,
                 HasGarage = HasGarage,
                 Two_Stories = Two_Stories,
                 Laundry_Room = Laundry_Room,

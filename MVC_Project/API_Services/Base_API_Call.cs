@@ -110,7 +110,7 @@ namespace MVC_Project.API_Services
 
         public async Task<IEnumerable<Properties_List>> GetFilteredProperties(Filter filter)
         {
-            var url = $"Property/GetPropertiesWithFilter?keyword={filter.Keyword}&city={filter.City}&status={filter.Status}&maxPrice={filter.PriceRange}&maxArea={filter.AreaSize}&maxBaths={filter.Baths}&maxBed={filter.Beds}&HasGarage={filter.HasGarage}&Two_Stories={filter.Two_Stories}&Laundry_Room={filter.Laundry_Room}&HasPool={filter.HasPool}&HasGarden={filter.HasGarden}&HasElevator={filter.HasElevator}&HasBalcony={filter.HasBalcony}&HasParking={filter.HasParking}&HasCentralHeating={filter.HasCentralHeating}&IsFurnished={filter.IsFurnished}";
+            var url = $"Property/GetPropertiesWithFilter?keyword={filter.Keyword}&city={filter.City}&status={filter.Status}&maxPrice={filter.PriceRange}&maxArea={filter.AreaSize}&minBaths={filter.Baths}&minBed={filter.Beds}&HasGarage={filter.HasGarage}&Two_Stories={filter.Two_Stories}&Laundry_Room={filter.Laundry_Room}&HasPool={filter.HasPool}&HasGarden={filter.HasGarden}&HasElevator={filter.HasElevator}&HasBalcony={filter.HasBalcony}&HasParking={filter.HasParking}&HasCentralHeating={filter.HasCentralHeating}&IsFurnished={filter.IsFurnished}";
 
             try
             {
