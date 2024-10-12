@@ -1,42 +1,41 @@
 ﻿@model IEnumerable<MVC_Project.Models.Properties_List>
 
-<div class="row" id="propertyList">
+@{
+    ViewData["Title"] = "Properties";
+    ViewData["PageHeader"] = "Property List";
+}
+
+<!-- Property Cards -->
+<div class="row">
     @foreach (var property in Model)
     {
-        <div class="col-lg-4 col-md-6 mb-4 property-item">
-            <div class="card shadow-sm position-relative">
-                <!-- الشارة تظهر على الصورة -->
-                <div class="status-badge position-absolute top-0 start-0 m-2">
-                    @if ((int)property.Status == 1)
-                    {
-                        <span class="badge bg-info text-white" style="margin-left: 3px;">For Rent</span>
-                    }
-                    else if ((int)property.Status == 2)
-                    {
-                        <span class="badge bg-primary text-white" style="margin-left: 3px;">For Sale</span>
-                    }
-                </div>
-                <img src="@property.Image" class="card-img-top" alt="Property Image" style="height: 250px; object-fit: cover;">
-                <div class="card-body text-center">
-                    <h5 class="card-title text-primary">@property.Title</h5>
-                    <p class="card-text text-muted">
-                        @property.Bedrooms Beds | @property.Bathrooms Baths | @property.Area sq ft
-                    </p>
-                    <p class="card-text text-muted">
-                        <strong>City:</strong> @property.City
-                    </p>
-                    <p class="card-text text-success font-weight-bold">$@property.Price</p>
-
-                    <!-- عرض تاريخ إضافة العقار -->
-                    <p class="card-text text-muted">
-                        <small>Added on: @property.DateAdded.ToString("MMMM dd, yyyy")</small>
-                    </p>
-
-                        <a asp-controller="Home" asp-action="PropertyDetails" asp-route-id="@property.Id" class="btn btn-primary btn-block">
-                        <i class="fas fa-eye"></i> View Details</a>
-
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card property-item">
+                <img src="@property.Image" class="card-img-top" alt="Property Image">
+                <div class="card-body">
+                    <h5 class="card-title">@property.Title</h5>
+                    <p class="card-text">@property.Bedrooms Beds | @property.Bathrooms Baths | @property.Area sq ft</p>
+                    <p class="card-text">$@property.Price</p>
+                    <a asp-controller="Properties" asp-action="Details" asp-route-id="@property.Id" class="btn btn-primary">View Details</a>
                 </div>
             </div>
         </div>
     }
 </div>
+@* 
+<!-- Pagination -->
+<div class="row">
+    <div class="col-12">
+        <nav>
+            <ul class="pagination justify-content-center">
+                @for (int i = 1; i <= TotalPages; i++)
+                {
+                    <li class="page-item @(i == CurrentPage ? "active" : "")">
+                        <a class="page-link" href="?page=@i">@i</a>
+                    </li>
+                }
+            </ul>
+        </nav>
+    </div>
+</div>
+ *@

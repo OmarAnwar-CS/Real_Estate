@@ -16,11 +16,7 @@ namespace MVC_Project.API_Services
         Task<IEnumerable<Properties_List>> GetPropertyList();
         Task<IEnumerable<Properties_List>> GetPropertyList(IEnumerable<int> Id);
         Task<IEnumerable<Properties_List>> GetFilteredProperties(Filter filter);
-        Task CreateUserAsync(User_Create user);
-        Task<HttpResponseMessage> UpdateUserInfo(User_Info userInfo);
-        Task<User_Info> GetUserInfo(string email);
-        Task<IEnumerable<Inquity_List>> GetMassagesToUser(int Id);
-        Task<IEnumerable<Inquity_List>> GetMassagesToProperty(int Id);
+        Task<User_Info> GetUserInfo(int id);
 
 
 
@@ -88,25 +84,7 @@ namespace MVC_Project.API_Services
             }
         }
 
-        public async Task<IEnumerable<Properties_List>> GetPropertyList(IEnumerable<int> Id)
-        {
-            try
-            {
-                var response = await _httpClient.GetAsync("Property/GetPropertyList");
-                response.EnsureSuccessStatusCode();  // Ensure the response is successful
-                var result = await response.Content.ReadFromJsonAsync<IEnumerable<Properties_List>>();
-                result = result ?? Enumerable.Empty<Properties_List>();
-                result = result.Where(x => Id.Contains(x.Id));
-                result = result.OrderByDescending(U => U.DateAdded)
-                                       .ThenBy(U => U.Price);
-                return result;  // Return empty collection if null
-            }
-            catch (Exception ex)
-            {
-                // Log exception here
-                throw new ApplicationException("An error occurred while fetching city data.", ex);
-            }
-        }
+
 
         public async Task<IEnumerable<Properties_List>> GetFilteredProperties(Filter filter)
         {
