@@ -1,16 +1,7 @@
-﻿//document.addEventListener("DOMContentLoaded", function () {
-//    // Function to load a partial view dynamically and handle the active class
-//    async function loadPartialView(url, clickedLink) {
-//        try {
-//            let response = await fetch(url);
-//            if (!response.ok) throw new Error("Network response was not ok");
+﻿// Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
+// for details on configuring this project to bundle and minify static web assets.
 
-//            let html = await response.text();
-//            document.getElementById("properties").innerHTML = html;
-//        } catch (error) {
-//            console.error("Error loading partial view:", error);
-//        }
-//    }
+// Write your JavaScript code.
 
 
 
@@ -29,10 +20,11 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // Add event listeners to both buttons for sorting
-    document.getElementById("sortedPropertiesPrice").addEventListener("click", function () {
-        loadPartialView('/Home/SortedProperties');
-    });
+    //// Add event listeners to both buttons for sorting
+    //document.getElementById("sortedPropertiesPrice").addEventListener("click", function () {
+    //    loadPartialView('/Home/SortedProperties');
+    //});
+
 
     // Functions to update price and area values
     window.updatePriceValue = function (value) {

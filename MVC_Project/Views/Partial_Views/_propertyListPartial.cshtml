@@ -16,8 +16,27 @@
                         <span class="badge bg-primary text-white" style="margin-left: 3px;">For Sale</span>
                     }
                 </div>
+                <img src="@property.Image" class="card-img-top" alt="Property Image" style="height: 250px; object-fit: cover;">
+                <div class="card-body text-center">
+                    <h5 class="card-title text-primary">@property.Title</h5>
+                    <p class="card-text text-muted">
+                        @property.Bedrooms Beds | @property.Bathrooms Baths | @property.Area sq ft
+                    </p>
+                    <p class="card-text text-muted">
+                        <strong>City:</strong> @property.City
+                    </p>
+                    <p class="card-text text-success font-weight-bold">$@property.Price</p>
+
+                    <!-- عرض تاريخ إضافة العقار -->
+                    <p class="card-text text-muted">
+                        <small>Added on: @property.DateAdded.ToString("MMMM dd, yyyy")</small>
+                    </p>
+
+                        <a asp-controller="Home" asp-action="PropertyDetails" asp-route-id="@property.Id" class="btn btn-primary btn-block">
+                        <i class="fas fa-eye"></i> View Details</a>
+
+                </div>
             </div>
         </div>
-</div>
-                }
+    }
 </div>

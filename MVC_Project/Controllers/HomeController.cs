@@ -72,7 +72,7 @@ namespace MVC_Project.Controllers
                 HasCentralHeating = HasCentralHeating,
                 IsFurnished = IsFurnished
             };
-           
+
             var properties = await _base_API_Call.GetFilteredProperties(filter);
             return PartialView("/Views/Partial_Views/_propertyListPartial.cshtml", properties);
         }

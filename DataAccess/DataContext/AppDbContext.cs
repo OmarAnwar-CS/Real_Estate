@@ -25,10 +25,8 @@ namespace application.DataAccess
 
         //public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //            => optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=Real_Estate_Db_V3.9;Integrated Security=True;TrustServerCertificate=True");
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder.UseSqlServer("Data Source=DESKTOP-5JC2MA4\\SQLEXPRESS;Initial Catalog=Real_Estate_Db_V2;Integrated Security=True;TrustServerCertificate=True");
+                    => optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=Real_Estate_Db_V3.9;Integrated Security=True;TrustServerCertificate=True");
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
