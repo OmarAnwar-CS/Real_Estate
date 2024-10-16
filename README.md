@@ -40,7 +40,7 @@ APIs:
 | <img height="50" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7uwLyomLuj-z2wdukzRfaViu2o_urpD0h8eOGOdtcLQ&s">	        | JavaScript  |
 | <img height="50" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEvudtN4NwY9uzAFdm7HS3t6KXE0Uw1rvFciuANFQkAQ&s">	        | AJAX  |
 | <img height="50" src="https://upload.wikimedia.org/wikipedia/commons/7/7d/Microsoft_.NET_logo.svg">	        | .Net  |
-| <img height="50" src="https://pbs.twimg.com/profile_images/1255113654049128448/J5Yt92WW_400x400.png"> | MySQL    |
+| <img height="50" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgPRYBz_mzBmDydueAnmTcZZBzM8JPPMXDCA&s"> | SQL Server    |
 
 ## Authors
 
