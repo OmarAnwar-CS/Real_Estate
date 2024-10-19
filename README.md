@@ -44,6 +44,6 @@ APIs:
 
 ## Authors
 
-- [Ayman Ashraf](https://github.com/Mo3gz)
-- [Anas Elamir](https://github.com/AnasAlamir)
 - [Omar Anwar](https://github.com/OmarAnwar-CS)
+- [Anas Elamir](https://github.com/AnasAlamir)
+- [Ayman Ashraf](https://github.com/Mo3gz)
