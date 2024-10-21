@@ -35,6 +35,7 @@ APIs:
 | <img height="50" src="https://miro.medium.com/v2/resize:fit:720/format:webp/1*_NVBTVdmjt3Qvq3CZOySXg.png">	        | c#  |
 | <img height="50" src="https://www.simplilearn.com/ice9/free_resources_article_thumb/ASP.NETCoreMVC.PNG">	        | ASP.NETCoreMVC  |
 | <img height="50" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhtt-r3MspPioBWJpHYnmXSqyX6flxJb-i52XQ2spmsZ8l3SWSplIcrYqu05seF1z0u0Dhxs56kNNR9WxcpGTNf9-M2WEBRsrpVV7vLovoWRlIwFOyi_5RUweyTmxMaAg6aEzvSoxKkKTPm/s1600/ASP.NET-Web-API-Logo.png">	        | ASP.NET Web API  |
+| <img height="50" src="https://techbagfrontend.s3-ap-south-1.amazonaws.com/logos/wQJX4a6NTjNPqGNbc4mTuN.png">	        | Entity Framework Core |
 | <img height="50" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgPRYBz_mzBmDydueAnmTcZZBzM8JPPMXDCA&s"> | SQL Server    |
 | <img height="50" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsubI1xnS2EsbFC7IKOtHXy3o2yp5zNGHX8-mLk-0nVw&s">	        | HTML  |
 | <img height="50" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/CSS3_logo_and_wordmark.svg/1200px-CSS3_logo_and_wordmark.svg.png">	        | CSS  |
