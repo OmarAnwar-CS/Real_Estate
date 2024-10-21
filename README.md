@@ -32,15 +32,17 @@ APIs:
 
 | Icon                                                                                                                                 | Tech   |
 | ------------------------------------------------------------------------------------------------------------------------------------ | ------ |
-| <img height="50" src="https://user-images.githubusercontent.com/25181517/192108372-f71d70ac-7ae6-4c0d-8395-51d8870c2ef0.png">       | Git    |
-| <img height="50" src="https://user-images.githubusercontent.com/25181517/192108374-8da61ba1-99ec-41d7-80b8-fb2f7c0a4948.png">        | GitHub |
-| <img height="50" src="https://upload.wikimedia.org/wikipedia/commons/2/2c/Visual_Studio_Icon_2022.svg">        | Visual Studio |
+| <img height="50" src="https://miro.medium.com/v2/resize:fit:720/format:webp/1*_NVBTVdmjt3Qvq3CZOySXg.png">	        | c#  |
+| <img height="50" src="https://www.simplilearn.com/ice9/free_resources_article_thumb/ASP.NETCoreMVC.PNG">	        | ASP.NETCoreMVC  |
+| <img height="50" src="https://www.narolainfotech.com/wp-content/uploads/technology_stack/Asp.Net%20Web%20API.svg">	        | ASP.NET Web API  |
+| <img height="50" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgPRYBz_mzBmDydueAnmTcZZBzM8JPPMXDCA&s"> | SQL Server    |
 | <img height="50" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsubI1xnS2EsbFC7IKOtHXy3o2yp5zNGHX8-mLk-0nVw&s">	        | HTML  |
 | <img height="50" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/CSS3_logo_and_wordmark.svg/1200px-CSS3_logo_and_wordmark.svg.png">	        | CSS  |
 | <img height="50" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7uwLyomLuj-z2wdukzRfaViu2o_urpD0h8eOGOdtcLQ&s">	        | JavaScript  |
 | <img height="50" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEvudtN4NwY9uzAFdm7HS3t6KXE0Uw1rvFciuANFQkAQ&s">	        | AJAX  |
-| <img height="50" src="https://upload.wikimedia.org/wikipedia/commons/7/7d/Microsoft_.NET_logo.svg">	        | .Net  |
-| <img height="50" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgPRYBz_mzBmDydueAnmTcZZBzM8JPPMXDCA&s"> | SQL Server    |
+| <img height="50" src="https://upload.wikimedia.org/wikipedia/commons/2/2c/Visual_Studio_Icon_2022.svg">        | Visual Studio |
+| <img height="50" src="https://user-images.githubusercontent.com/25181517/192108372-f71d70ac-7ae6-4c0d-8395-51d8870c2ef0.png">       | Git    |
+| <img height="50" src="https://user-images.githubusercontent.com/25181517/192108374-8da61ba1-99ec-41d7-80b8-fb2f7c0a4948.png">        | GitHub |
 
 ## Authors
 
